@@ -1,0 +1,22 @@
+{
+  "signin": {
+    "title": "Portal de Administração",
+    "subtitle": "Faça login da sua conta",
+    "submit": "Iniciar sessão",
+    "logout": "Sair",
+    "email": "Email",
+    "password": "Password",
+    "errors": {
+      "invalid-email-format": "Formato de email inválido",
+      "empty-email": "Por favor digite o email",
+      "empty-password": "Por favor digite a palavra-passe",
+      "invalid-email-passord": "Email ou palavra-passe errada"
+    }
+  },
+  "navigation": {
+    "services": "Serviços",
+    "conveniences": "Comodidades",
+    "party-types": "Tipos de Eventos",
+    "space-types": "Tipos de Espaço"
+  }
+}
