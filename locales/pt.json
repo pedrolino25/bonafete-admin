@@ -24,6 +24,7 @@
     "reference-data-coutries": "Países",
     "reference-data-space-types": "Tipos de Espaço",
     "reference-data-event-types": "Tipos de Eventos",
+    "reference-data-conveniences": "Comodidades",
     "reference-data-services-categories": "Categorias de Serviços",
     "reference-data-services": "Serviços",
     "spaces": "Espaços",
@@ -43,5 +44,59 @@
     "users-clients": "Clientes",
     "user-permissions": "Permissões",
     "back": "Voltar"
+  },
+  "actions": {
+    "title": "Ações",
+    "edit": "Editar",
+    "remove": "Eliminar"
+  },
+  "titles": {
+    "remove": "Eliminar"
+  },
+  "subtitles": {
+    "remove": "Tem a certeza que deseja eliminar o registo?"
+  },
+  "button-actions": {
+    "cancel": "Cancelar",
+    "remove": "Eliminar",
+    "submit": "Submeter"
+  },
+  "table": {
+    "search": "Pesquisar",
+    "filters": "Filtros",
+    "select-from-list": "Selecionar da lista",
+    "select-date": "Selecionar data",
+    "clear": "Limpar",
+    "apply": "Aplicar",
+    "results": "Resultados:",
+    "loading": "A carregar...",
+    "no-results": "Sem resultados.",
+    "create": "Criar"
+  },
+  "columns": {
+    "id": "ID",
+    "title": "Nome",
+    "latitude": "Latitude",
+    "longitude": "Longitude",
+    "radius": "Radius",
+    "url": "Url"
+  },
+  "sections": {
+    "countries": {
+      "edit-title": "Editar País",
+      "create-title": "Criar País",
+      "edit-subtitle": "Insira as informações necessárias para editar o País",
+      "create-subtitle": "Insira as informações necessárias para criar o País"
+    }
+  },
+  "error": "Erro",
+  "success": "Sucesso",
+  "success-messages": {
+    "delete": "Dados eliminados com sucesso",
+    "submit": "Dados guardados com sucesso"
+  },
+  "error-messages": {
+    "delete": "Erro inesperado a eliminar.",
+    "submit": "Erro inesperdado a guardar"
   }
 }
