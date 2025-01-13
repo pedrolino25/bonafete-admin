@@ -84,7 +84,8 @@
     "locality": "Localidade",
     "postal_code": "Código Postal",
     "label": "Nome",
-    "image": "Imagem"
+    "image": "Imagem",
+    "description": "Descrição"
   },
   "sections": {
     "countries": {
@@ -110,6 +111,12 @@
       "create-title": "Criar Tipo de Espaço",
       "edit-subtitle": "Insira as informações necessárias para editar a tipo de espaço",
       "create-subtitle": "Insira as informações necessárias para criar a tipo de espaço"
+    },
+    "event-types": {
+      "edit-title": "Editar Tipo de Evento",
+      "create-title": "Criar Tipo de Evento",
+      "edit-subtitle": "Insira as informações necessárias para editar a tipo de evento",
+      "create-subtitle": "Insira as informações necessárias para criar a tipo de evento"
     }
   },
   "error": "Erro",
