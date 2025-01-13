@@ -110,7 +110,7 @@ export default function CreateEditCountrySection({
           </Button>
         </div>
       </div>
-      <div className="w-9/12 max-w-[700px] max-sm:w-full gap-8 pt-8 pl-6 max-sm:pl-0 pb-12 grid grid-cols-2 max-sm:grid-cols-1">
+      <div className="w-9/12 max-w-[700px] max-sm:w-full gap-4 pt-8 pl-6 max-sm:pl-0 pb-12 grid grid-cols-2 max-sm:grid-cols-1">
         <TextInput
           required
           label={t('columns.id')}

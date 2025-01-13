@@ -6,31 +6,31 @@ import { useRouter } from 'next/navigation'
 
 import { TextInput } from '@/components/inputs/text-input/text-input'
 import { toast } from '@/lib/hooks/use-toast'
-import { createUpdateLocality } from '@/services/api/reference-data'
+import { createUpdatePostalCode } from '@/services/api/reference-data'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useMutation } from '@tanstack/react-query'
 import { Send } from 'lucide-react'
 import { useForm } from 'react-hook-form'
 import z from 'zod'
 
-const localityFormSchema = z.object({
+const postalCodeFormSchema = z.object({
   id: z.string().min(1),
-  title: z.string().min(1),
+  city: z.string().min(1),
+  locality: z.string().min(1),
+  postal_code: z.string().min(1),
   latitude: z.string().min(1),
   longitude: z.string().min(1),
-  radius: z.string().min(1),
-  url: z.string().min(1),
 })
 
-export type LocalityFormType = z.infer<typeof localityFormSchema>
+export type PostalCodeFormType = z.infer<typeof postalCodeFormSchema>
 
-interface CreateEditLocalitySectionProps {
-  defaultValues?: LocalityFormType
+interface CreateEditPostalCodeSectionProps {
+  defaultValues?: PostalCodeFormType
 }
 
-export default function CreateEditLocalitySection({
+export default function CreateEditPostalCodeSection({
   defaultValues,
-}: CreateEditLocalitySectionProps) {
+}: CreateEditPostalCodeSectionProps) {
   const t = useTranslations()
   const router = useRouter()
 
@@ -39,25 +39,25 @@ export default function CreateEditLocalitySection({
     setValue,
     getValues,
     formState: { isValid },
-  } = useForm<LocalityFormType>({
+  } = useForm<PostalCodeFormType>({
     mode: 'onChange',
-    resolver: zodResolver(localityFormSchema),
+    resolver: zodResolver(postalCodeFormSchema),
     defaultValues,
   })
 
-  const onSubmit = (values: LocalityFormType) => {
-    createUpdateLocalityMutation.mutate({
-      id: values.id.toUpperCase(),
-      title: values.title,
+  const onSubmit = (values: PostalCodeFormType) => {
+    createUpdatePostalCodeMutation.mutate({
+      id: values.id,
+      city: values.city,
+      locality: values.locality,
+      postalCode: values.postal_code,
       latitude: parseFloat(values.latitude),
       longitude: parseFloat(values.longitude),
-      radius: parseFloat(values.radius),
-      url: values.url.toLowerCase(),
     })
   }
 
-  const createUpdateLocalityMutation = useMutation({
-    mutationFn: createUpdateLocality,
+  const createUpdatePostalCodeMutation = useMutation({
+    mutationFn: createUpdatePostalCode,
     onSuccess: () => {
       toast({
         variant: 'success',
@@ -76,7 +76,7 @@ export default function CreateEditLocalitySection({
   })
 
   const handleChange =
-    (field: keyof LocalityFormType) =>
+    (field: keyof PostalCodeFormType) =>
     (event: React.ChangeEvent<HTMLInputElement>) => {
       const value = event.target.value
       setValue(field, value, { shouldValidate: true, shouldDirty: true })
@@ -91,13 +91,13 @@ export default function CreateEditLocalitySection({
         <div className="w-full">
           <h3 className="text-lg font-semibold text-utility-brand-600">
             {defaultValues
-              ? t('sections.localities.edit-title')
-              : t('sections.localities.create-title')}
+              ? t('sections.postal-codes.edit-title')
+              : t('sections.postal-codes.create-title')}
           </h3>
           <p className="text-sm font-light text-utility-gray-500 pt-1 pr-4">
             {defaultValues
-              ? t('sections.localities.edit-subtitle')
-              : t('sections.localities.create-subtitle')}
+              ? t('sections.postal-codes.edit-subtitle')
+              : t('sections.postal-codes.create-subtitle')}
           </p>
         </div>
         <div className="flex justify-between items-center gap-4 max-sm:justify-end max-sm:items-start max-sm:pt-4 max-sm:w-full">
@@ -120,10 +120,25 @@ export default function CreateEditLocalitySection({
         />
         <TextInput
           required
-          label={t('columns.title')}
-          placeholder={t('columns.title')}
-          value={getValues().title}
-          onChange={handleChange('title')}
+          label={t('columns.city')}
+          placeholder={t('columns.city')}
+          value={getValues().city}
+          onChange={handleChange('city')}
+        />
+        <TextInput
+          required
+          label={t('columns.locality')}
+          placeholder={t('columns.locality')}
+          value={getValues().locality}
+          onChange={handleChange('locality')}
+        />
+        <TextInput
+          required
+          label={t('columns.postal_code')}
+          placeholder={t('columns.postal_code')}
+          value={getValues().postal_code}
+          onChange={handleChange('postal_code')}
+          type="number"
         />
         <TextInput
           required
@@ -140,21 +155,6 @@ export default function CreateEditLocalitySection({
           value={getValues().longitude}
           onChange={handleChange('longitude')}
           type="number"
-        />
-        <TextInput
-          required
-          label={t('columns.radius')}
-          placeholder={t('columns.radius')}
-          value={getValues().radius}
-          onChange={handleChange('radius')}
-          type="number"
-        />
-        <TextInput
-          required
-          label={t('columns.url')}
-          placeholder={t('columns.url')}
-          value={getValues().url}
-          onChange={handleChange('url')}
         />
       </div>
     </form>

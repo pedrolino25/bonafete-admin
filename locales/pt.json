@@ -79,7 +79,10 @@
     "latitude": "Latitude",
     "longitude": "Longitude",
     "radius": "Radius",
-    "url": "Url"
+    "url": "Url",
+    "city": "Cidade",
+    "locality": "Localidade",
+    "postal_code": "Código Postal"
   },
   "sections": {
     "countries": {
@@ -93,6 +96,12 @@
       "create-title": "Criar Localidade",
       "edit-subtitle": "Insira as informações necessárias para editar a localidade",
       "create-subtitle": "Insira as informações necessárias para criar a localidade"
+    },
+    "postal-codes": {
+      "edit-title": "Editar Código Postal",
+      "create-title": "Criar Código Postal",
+      "edit-subtitle": "Insira as informações necessárias para editar a código postal",
+      "create-subtitle": "Insira as informações necessárias para criar a código postal"
     }
   },
   "error": "Erro",

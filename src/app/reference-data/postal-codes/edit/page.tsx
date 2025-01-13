@@ -1,24 +1,24 @@
 'use client'
 
 import { Navbar } from '@/components/navigation/Navbar'
-import CreateEditLocalitySection from '@/components/sections/localities/CreateEditLocalitySection'
+import CreateEditPostalCodeSection from '@/components/sections/postal-codes/CreateEditPostalCodesSection'
 import { Button } from '@/components/ui/button'
-import { getLocality } from '@/services/api/reference-data'
+import { getPostalCode } from '@/services/api/reference-data'
 import { useQuery } from '@tanstack/react-query'
 import { ChevronLeft } from 'lucide-react'
 import { useTranslations } from 'next-intl'
 import { useRouter, useSearchParams } from 'next/navigation'
 
-export default function EditLocality() {
+export default function EditPostalCode() {
   const router = useRouter()
   const t = useTranslations()
   const params = useSearchParams()
   const id = params.get('id') as string
 
   const { data } = useQuery({
-    queryKey: ['locality', id],
+    queryKey: ['postal-code', id],
     queryFn: async () => {
-      return await getLocality(id)
+      return await getPostalCode(id)
     },
   })
 
@@ -36,14 +36,14 @@ export default function EditLocality() {
       }
     >
       {data && data.id && (
-        <CreateEditLocalitySection
+        <CreateEditPostalCodeSection
           defaultValues={{
             id: data.id,
-            title: data.title,
+            city: data.city,
+            locality: data.locality,
+            postal_code: data.postalCode,
             latitude: data.latitude.toString(),
             longitude: data.longitude.toString(),
-            radius: data.radius.toString(),
-            url: data.url,
           }}
         />
       )}
