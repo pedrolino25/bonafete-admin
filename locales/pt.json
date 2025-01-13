@@ -85,7 +85,8 @@
     "postal_code": "Código Postal",
     "label": "Nome",
     "image": "Imagem",
-    "description": "Descrição"
+    "description": "Descrição",
+    "type": "Tipo"
   },
   "sections": {
     "countries": {
@@ -103,20 +104,26 @@
     "postal-codes": {
       "edit-title": "Editar Código Postal",
       "create-title": "Criar Código Postal",
-      "edit-subtitle": "Insira as informações necessárias para editar a código postal",
-      "create-subtitle": "Insira as informações necessárias para criar a código postal"
+      "edit-subtitle": "Insira as informações necessárias para editar o código postal",
+      "create-subtitle": "Insira as informações necessárias para criar o código postal"
     },
     "space-types": {
       "edit-title": "Editar Tipo de Espaço",
       "create-title": "Criar Tipo de Espaço",
-      "edit-subtitle": "Insira as informações necessárias para editar a tipo de espaço",
-      "create-subtitle": "Insira as informações necessárias para criar a tipo de espaço"
+      "edit-subtitle": "Insira as informações necessárias para editar o tipo de espaço",
+      "create-subtitle": "Insira as informações necessárias para criar o tipo de espaço"
     },
     "event-types": {
       "edit-title": "Editar Tipo de Evento",
       "create-title": "Criar Tipo de Evento",
-      "edit-subtitle": "Insira as informações necessárias para editar a tipo de evento",
-      "create-subtitle": "Insira as informações necessárias para criar a tipo de evento"
+      "edit-subtitle": "Insira as informações necessárias para editar o tipo de evento",
+      "create-subtitle": "Insira as informações necessárias para criar o tipo de evento"
+    },
+    "conveniences": {
+      "edit-title": "Editar Comodidade",
+      "create-title": "Criar Comodidade",
+      "edit-subtitle": "Insira as informações necessárias para editar a comodidade",
+      "create-subtitle": "Insira as informações necessárias para criar a comodidade"
     }
   },
   "error": "Erro",

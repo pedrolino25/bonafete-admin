@@ -154,17 +154,18 @@ export interface SpaceConveniencesItemResponse {
   image: string
 }
 
-const getSpaceConveniencesList =
-  async (): Promise<SpaceConveniencesItemResponse> => {
-    const response = await fetch(`${ROOT}/api/reference-data/conveniences`, {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-        Autorization: getCookie(Cookies.SESSION_COOKIE) as string,
-      },
-    })
-    return response.json()
-  }
+const getSpaceConveniencesList = async (): Promise<
+  SpaceConveniencesItemResponse[]
+> => {
+  const response = await fetch(`${ROOT}/api/reference-data/conveniences`, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+      Autorization: getCookie(Cookies.SESSION_COOKIE) as string,
+    },
+  })
+  return response.json()
+}
 
 const getSpaceConvenience = async (
   id: string
