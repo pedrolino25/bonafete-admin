@@ -86,7 +86,9 @@
     "label": "Nome",
     "image": "Imagem",
     "description": "Descrição",
-    "type": "Tipo"
+    "type": "Tipo",
+    "key": "Código",
+    "value": "Valor"
   },
   "sections": {
     "countries": {
@@ -124,6 +126,12 @@
       "create-title": "Criar Comodidade",
       "edit-subtitle": "Insira as informações necessárias para editar a comodidade",
       "create-subtitle": "Insira as informações necessárias para criar a comodidade"
+    },
+    "services-category": {
+      "edit-title": "Editar Categoria de Serviço",
+      "create-title": "Criar Categoria de Serviço",
+      "edit-subtitle": "Insira as informações necessárias para editar a categoria de serviço",
+      "create-subtitle": "Insira as informações necessárias para criar a categoria de serviço"
     }
   },
   "error": "Erro",
