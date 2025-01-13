@@ -1,4 +1,6 @@
 {
+  "company": "Bonafete",
+  "app-name": "Portal de Administração",
   "signin": {
     "title": "Portal de Administração",
     "subtitle": "Faça login da sua conta",
@@ -14,9 +16,32 @@
     }
   },
   "navigation": {
-    "services": "Serviços",
-    "conveniences": "Comodidades",
-    "party-types": "Tipos de Eventos",
-    "space-types": "Tipos de Espaço"
+    "database": "Base de Dados",
+    "management": "Gestão",
+    "reference-data": "Dados de Referência",
+    "reference-data-postal-codes": "Códigos Postal",
+    "reference-data-localities": "Localidades",
+    "reference-data-coutries": "Países",
+    "reference-data-space-types": "Tipos de Espaço",
+    "reference-data-event-types": "Tipos de Eventos",
+    "reference-data-services-categories": "Categorias de Serviços",
+    "reference-data-services": "Serviços",
+    "spaces": "Espaços",
+    "spaces-published": "Publicados",
+    "spaces-archived": "Arquivados",
+    "hosts": "Anfitriões",
+    "hosts-active": "Ativos",
+    "hosts-archived": "Arquivados",
+    "hosts-suspended": "Suspensos",
+    "reservations": "Reservas",
+    "reservations-confirmed": "Confirmadas",
+    "reservations-canceled": "Canceladas",
+    "reservations-pending": "Pendentes",
+    "users": "Utilizadores",
+    "user-management": "Gestão de Utilizadores",
+    "users-employes": "Colaboradores",
+    "users-clients": "Clientes",
+    "user-permissions": "Permissões",
+    "back": "Voltar"
   }
 }

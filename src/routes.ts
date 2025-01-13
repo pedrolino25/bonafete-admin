@@ -1,104 +1,178 @@
-import { Armchair, Cake, HandPlatter, House } from 'lucide-react'
-import { SidebarLink } from './components/navigation/sidebar/Sidebar'
-import { TopbarLink } from './components/navigation/topbar/Topbar'
+import {
+  Database,
+  House,
+  LucideIcon,
+  ShieldX,
+  Tag,
+  User,
+  Users,
+} from 'lucide-react'
 
-export const routes = {
-  sidebar: [
-    {
-      title: 'navigation.space-types',
-      icon: House,
-      path: '/space-types',
-      alias: 'space-types',
-    },
-    {
-      title: 'navigation.party-types',
-      icon: Cake,
-      path: '/party-types',
-      alias: 'party-types',
-    },
-    {
-      title: 'navigation.services',
-      icon: HandPlatter,
-      path: '/services/services',
-      alias: 'services',
-    },
-    {
-      title: 'navigation.conveniences',
-      icon: Armchair,
-      path: '/conveniences',
-      alias: 'conveniences',
-    },
-  ] as SidebarLink[],
-  applications: [
-    {
-      title: 'navigation.spontaneous-applications',
-      path: '/applications/spontaneous',
-    },
-    {
-      title: 'navigation.sent-applications',
-      path: '/applications/sent',
-    },
-    {
-      title: 'navigation.ready-applications',
-      path: '/applications/ready',
-    },
-    {
-      title: 'navigation.onboarding-applications',
-      path: '/applications/onboarding',
-    },
-    {
-      title: 'navigation.completed-applications',
-      path: '/applications/completed',
-    },
-  ] as TopbarLink[],
-  hosts: [
-    {
-      title: 'navigation.pending-hosts',
-      path: '/hosts/pending',
-    },
-    {
-      title: 'navigation.active-hosts',
-      path: '/hosts/active',
-    },
-    {
-      title: 'navigation.suspended-hosts',
-      path: '/hosts/suspended',
-    },
-    {
-      title: 'navigation.archived-hosts',
-      path: '/hosts/archived',
-    },
-  ] as TopbarLink[],
-  processes: [
-    {
-      title: 'navigation.in-progress-processes',
-      path: '/processes/in-progress',
-    },
-    {
-      title: 'navigation.scheduled-processes',
-      path: '/processes/scheduled',
-    },
-    {
-      title: 'navigation.completed-processes',
-      path: '/processes/completed',
-    },
-    {
-      title: 'navigation.archived-processes',
-      path: '/processes/archived',
-    },
-  ] as TopbarLink[],
-  spaces: [
-    {
-      title: 'navigation.pending-spaces',
-      path: '/spaces/pending',
-    },
-    {
-      title: 'navigation.active-spaces',
-      path: '/spaces/active',
-    },
-    {
-      title: 'navigation.archived-spaces',
-      path: '/spaces/archived',
-    },
-  ] as TopbarLink[],
+export interface NavbarChildrenLink {
+  title: string
+  path: string
+  alias: string
 }
+
+export interface NavbarLink {
+  title: string
+  icon: LucideIcon
+  path: string
+  alias: string
+  childrens?: NavbarChildrenLink[]
+}
+
+export interface NavbarSection {
+  title?: string
+  links: NavbarLink[]
+}
+
+export const routes = [
+  {
+    title: 'navigation.management',
+    links: [
+      {
+        title: 'navigation.spaces',
+        icon: House,
+        path: '/spaces/published',
+        alias: 'spaces',
+        childrens: [
+          {
+            title: 'navigation.spaces-published',
+            path: '/spaces/published',
+            alias: 'spaces',
+          },
+          {
+            title: 'navigation.spaces-archived',
+            path: '/spaces/archived',
+            alias: 'spaces',
+          },
+        ],
+      },
+      {
+        title: 'navigation.hosts',
+        icon: User,
+        path: '/hosts/active',
+        alias: 'hosts',
+        childrens: [
+          {
+            title: 'navigation.hosts-active',
+            path: '/hosts/active',
+            alias: 'hosts',
+          },
+          {
+            title: 'navigation.hosts-archived',
+            path: '/hosts/archived',
+            alias: 'hosts',
+          },
+          {
+            title: 'navigation.hosts-suspended',
+            path: '/hosts/suspended',
+            alias: 'hosts',
+          },
+        ],
+      },
+      {
+        title: 'navigation.reservations',
+        icon: Tag,
+        path: '/reservations/confirmed',
+        alias: 'reservations',
+        childrens: [
+          {
+            title: 'navigation.reservations-confirmed',
+            path: '/reservations/confirmed',
+            alias: 'reservations',
+          },
+          {
+            title: 'navigation.reservations-canceled',
+            path: '/reservations/canceled',
+            alias: 'reservations',
+          },
+          {
+            title: 'navigation.reservations-pending',
+            path: '/reservations/pending',
+            alias: 'reservations',
+          },
+        ],
+      },
+    ],
+  },
+  {
+    title: 'navigation.database',
+    links: [
+      {
+        title: 'navigation.reference-data',
+        icon: Database,
+        path: '/reference-data/coutries',
+        alias: 'reference-data',
+        childrens: [
+          {
+            title: 'navigation.reference-data-coutries',
+            path: '/reference-data/coutries',
+            alias: 'reference-data',
+          },
+          {
+            title: 'navigation.reference-data-localities',
+            path: '/reference-data/localities',
+            alias: 'reference-data',
+          },
+          {
+            title: 'navigation.reference-data-postal-codes',
+            path: '/reference-data/postal-codes',
+            alias: 'reference-data',
+          },
+          {
+            title: 'navigation.reference-data-space-types',
+            path: '/reference-data/space-types',
+            alias: 'reference-data',
+          },
+          {
+            title: 'navigation.reference-data-event-types',
+            path: '/reference-data/event-types',
+            alias: 'reference-data',
+          },
+          {
+            title: 'navigation.reference-data-services-categories',
+            path: '/reference-data/services-categories',
+            alias: 'reference-data',
+          },
+          {
+            title: 'navigation.reference-data-services',
+            path: '/reference-data/services',
+            alias: 'reference-data',
+          },
+        ],
+      },
+    ],
+  },
+
+  {
+    title: 'navigation.user-management',
+    links: [
+      {
+        title: 'navigation.users',
+        icon: Users,
+        path: '/users/employes',
+        alias: 'users',
+        childrens: [
+          {
+            title: 'navigation.users-employes',
+            path: '/users/employes',
+            alias: 'users',
+          },
+          {
+            title: 'navigation.users-clients',
+            path: '/users/clients',
+            alias: 'users',
+          },
+        ],
+      },
+      {
+        title: 'navigation.user-permissions',
+        icon: ShieldX,
+        path: '/users/permissions',
+        alias: 'user-permissions',
+      },
+    ],
+  },
+] as NavbarSection[]
