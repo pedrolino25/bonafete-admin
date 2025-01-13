@@ -82,7 +82,9 @@
     "url": "Url",
     "city": "Cidade",
     "locality": "Localidade",
-    "postal_code": "Código Postal"
+    "postal_code": "Código Postal",
+    "label": "Nome",
+    "image": "Imagem"
   },
   "sections": {
     "countries": {
@@ -102,6 +104,12 @@
       "create-title": "Criar Código Postal",
       "edit-subtitle": "Insira as informações necessárias para editar a código postal",
       "create-subtitle": "Insira as informações necessárias para criar a código postal"
+    },
+    "space-types": {
+      "edit-title": "Editar Tipo de Espaço",
+      "create-title": "Criar Tipo de Espaço",
+      "edit-subtitle": "Insira as informações necessárias para editar a tipo de espaço",
+      "create-subtitle": "Insira as informações necessárias para criar a tipo de espaço"
     }
   },
   "error": "Erro",
