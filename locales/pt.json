@@ -85,8 +85,14 @@
     "countries": {
       "edit-title": "Editar País",
       "create-title": "Criar País",
-      "edit-subtitle": "Insira as informações necessárias para editar o País",
-      "create-subtitle": "Insira as informações necessárias para criar o País"
+      "edit-subtitle": "Insira as informações necessárias para editar o país",
+      "create-subtitle": "Insira as informações necessárias para criar o país"
+    },
+    "localities": {
+      "edit-title": "Editar Localidade",
+      "create-title": "Criar Localidade",
+      "edit-subtitle": "Insira as informações necessárias para editar a localidade",
+      "create-subtitle": "Insira as informações necessárias para criar a localidade"
     }
   },
   "error": "Erro",
