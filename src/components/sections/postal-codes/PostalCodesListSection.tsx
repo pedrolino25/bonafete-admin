@@ -52,7 +52,7 @@ export default function PostalCodesListSection({
       id: 'id',
       header: () => {
         return (
-          <div className="px-3.5 text-sm font-extrabold text-utility-gray-900">
+          <div className="px-3.5 text-sm font-extrabold text-utility-gray-600">
             {t('columns.id')}
           </div>
         )
@@ -66,6 +66,7 @@ export default function PostalCodesListSection({
           <Button
             variant="link"
             color="secondary"
+            className="text-utility-gray-600"
             onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
           >
             {t('columns.city')}
@@ -86,6 +87,7 @@ export default function PostalCodesListSection({
           <Button
             variant="link"
             color="secondary"
+            className="text-utility-gray-600"
             onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
           >
             {t('columns.locality')}
@@ -106,6 +108,7 @@ export default function PostalCodesListSection({
           <Button
             variant="link"
             color="secondary"
+            className="text-utility-gray-600"
             onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
           >
             {t('columns.postal_code')}
@@ -126,6 +129,7 @@ export default function PostalCodesListSection({
           <Button
             variant="link"
             color="secondary"
+            className="text-utility-gray-600"
             onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
           >
             {t('columns.latitude')}
@@ -147,6 +151,7 @@ export default function PostalCodesListSection({
           <Button
             variant="link"
             color="secondary"
+            className="text-utility-gray-600"
             onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
           >
             {t('columns.longitude')}
