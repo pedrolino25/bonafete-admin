@@ -51,15 +51,27 @@
     "remove": "Eliminar"
   },
   "titles": {
-    "remove": "Eliminar"
+    "remove": "Eliminar",
+    "archive-space": "Arquivar espaço",
+    "publish-space": "Publicar espaço",
+    "spaces": "Espaços",
+    "reservations": "Reservas",
+    "view-reservation": "Dados de Pagamento"
   },
   "subtitles": {
-    "remove": "Tem a certeza que deseja eliminar o registo?"
+    "remove": "Tem a certeza que deseja eliminar o registo?",
+    "archive-space": "Tem a certeza que deseja arquivar o espaço?",
+    "publish-space": "Tem a certeza que deseja publicar o espaço?"
   },
   "button-actions": {
     "cancel": "Cancelar",
     "remove": "Eliminar",
-    "submit": "Submeter"
+    "submit": "Submeter",
+    "edit": "Editar",
+    "publish": "Publicar",
+    "archive": "Arquivar",
+    "manage": "Gerir",
+    "confirm": "Confirmar"
   },
   "table": {
     "search": "Pesquisar",
@@ -166,6 +178,20 @@
       "create-title": "Criar Serviço",
       "edit-subtitle": "Insira as informações necessárias para editar o serviço",
       "create-subtitle": "Insira as informações necessárias para criar o serviço"
+    },
+    "host": {
+      "host-title": "Anfitrião",
+      "host-subtitle": "Informações de anfitrião"
+    },
+    "reservation": {
+      "id": "ID:",
+      "amount": "Valor:",
+      "platform_stripe_fee": "Comissão Stripe",
+      "platform_fee": "Comissão Boanfete",
+      "host_total": "Total Anfitrião",
+      "refund_amount": "Reembolso:",
+      "payment_date": "Data de Pagamento:",
+      "status": "Estado:"
     }
   },
   "error": "Erro",
@@ -177,5 +203,35 @@
   "error-messages": {
     "delete": "Erro inesperado a eliminar.",
     "submit": "Erro inesperdado a guardar"
+  },
+  "host-section": {
+    "name": "Nome:",
+    "email": "Email:",
+    "phone": "Telefone:",
+    "company-type": "Tipo de empresa:",
+    "status": "Estado:",
+    "stripe-account": "Conta Stripe:",
+    "archive": "Arquivar",
+    "edit": "Editar",
+    "publish": "Aprovar",
+    "create-space": "Criar espaço"
+  },
+  "host-status": {
+    "completed": "Activo",
+    "pending": "Pendente",
+    "archived": "Arquivado",
+    "suspended": "Suspenso"
+  },
+  "reservations-status": {
+    "confirmed": "Confirmada",
+    "pending": "Pendente",
+    "cancelled-by-host": "Cancelada por anfitrião",
+    "cancelled-by-client": "Cancelada por cliente"
+  },
+  "space-status": {
+    "pending": "Pendente",
+    "published": "Ativo",
+    "archived": "Arquivado",
+    "draft": "Rascunho"
   }
 }

@@ -1,7 +1,8 @@
 'use client'
 
 import { Navbar } from '@/components/navigation/Navbar'
-import { getHostsListByStatus, HostsStatus } from '@/services/api/hosts'
+import { HostStatus } from '@/lib/utils/consts'
+import { getHostsListByStatus } from '@/services/api/hosts'
 import { useQuery } from '@tanstack/react-query'
 import dynamic from 'next/dynamic'
 const HostsListSection = dynamic(
@@ -11,9 +12,9 @@ const HostsListSection = dynamic(
 
 export default function Hosts() {
   const { isPending, data, refetch } = useQuery({
-    queryKey: ['hosts', HostsStatus.Suspended],
+    queryKey: ['hosts', HostStatus.Suspended],
     queryFn: async () => {
-      return await getHostsListByStatus(HostsStatus.Suspended)
+      return await getHostsListByStatus(HostStatus.Suspended)
     },
   })
 

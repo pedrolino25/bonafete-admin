@@ -1,3 +1,4 @@
+import { HostStatus, SpaceStatus } from '@/lib/utils/consts'
 import { getCookie } from 'cookies-next'
 import { Cookies } from '../auth'
 
@@ -14,15 +15,8 @@ export interface HostsListItemResponse {
   created_at: string
 }
 
-export enum HostsStatus {
-  Pending = 'pending',
-  Active = 'completed',
-  Archived = 'archived',
-  Suspended = 'suspended',
-}
-
 const getHostsListByStatus = async (
-  status: HostsStatus
+  status: HostStatus
 ): Promise<HostsListItemResponse[]> => {
   const response = await fetch(
     `${ROOT}/api/onboarding/hosts-list?status=${status}`,
@@ -37,4 +31,57 @@ const getHostsListByStatus = async (
   return response.json()
 }
 
-export { getHostsListByStatus }
+export interface SpaceInfoResponse {
+  id: string
+  title?: string
+  url?: string
+  max_persons?: number
+  status?: SpaceStatus
+  business_model?: string
+  photos?: string[]
+}
+
+export interface ReservationsInfoResponse {
+  id: string
+  reservation_id: string
+  created_at: string
+  status: string
+  date: string
+  client_name: string
+  client_id: string
+  amount: string
+  charge_id: string
+  platform_fee: string
+  platform_stripe_fee: string
+  refund_amount: string
+  net: string
+  payment_id: string
+  payment_date: string
+  line_items: string
+}
+
+export interface HostResponse {
+  id: string
+  account_id: string
+  type: string
+  name: string
+  email: string
+  phone: string
+  picture: string
+  status: HostStatus
+  spaces: SpaceInfoResponse[]
+  reservations: ReservationsInfoResponse[]
+}
+
+const getHost = async (id: string): Promise<HostResponse> => {
+  const response = await fetch(`${ROOT}/api/admin/host?id=${id}`, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+      Autorization: getCookie(Cookies.SESSION_COOKIE) as string,
+    },
+  })
+  return response.json()
+}
+
+export { getHost, getHostsListByStatus }

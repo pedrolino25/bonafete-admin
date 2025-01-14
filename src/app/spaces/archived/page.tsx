@@ -1,7 +1,8 @@
 'use client'
 
 import SpacesListSection from '@/components/sections/spaces/SpacesListSection'
-import { getSpacesListByStatus, SpaceStatus } from '@/services/api/spaces'
+import { SpaceStatus } from '@/lib/utils/consts'
+import { getSpacesListByStatus } from '@/services/api/spaces'
 import { useQuery } from '@tanstack/react-query'
 
 export default function Spaces() {

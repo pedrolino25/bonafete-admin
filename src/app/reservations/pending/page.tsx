@@ -1,10 +1,8 @@
 'use client'
 
 import { Navbar } from '@/components/navigation/Navbar'
-import {
-  getReservationsList,
-  ReservationStatus,
-} from '@/services/api/reservations'
+import { ReservationStatus } from '@/lib/utils/consts'
+import { getReservationsList } from '@/services/api/reservations'
 import { useQuery } from '@tanstack/react-query'
 import dynamic from 'next/dynamic'
 const ReservationsListSection = dynamic(
