@@ -75,6 +75,7 @@
   },
   "columns": {
     "id": "ID",
+    "name": "Nome",
     "title": "Nome",
     "latitude": "Latitude",
     "longitude": "Longitude",
@@ -100,7 +101,22 @@
     "amount": "Valor",
     "refunded_amount": "Reembolso",
     "platform_fee_amount": "Taxa de Serviço",
-    "created_at": "Criado em"
+    "created_at": "Criado em",
+    "targets": "Eventos",
+    "business_model": "Modelo",
+    "business_type": "Empresa",
+    "account_id": "Stripe ID",
+    "phone": "Contacto",
+    "email": "Email"
+  },
+  "business_model": {
+    "only-space": "Aluguer",
+    "space-and-packages": "Aluguer + Pacotes",
+    "packages": "Pacotes"
+  },
+  "business_type": {
+    "individual": "Indivíduo",
+    "company": "Empresa"
   },
   "sections": {
     "countries": {

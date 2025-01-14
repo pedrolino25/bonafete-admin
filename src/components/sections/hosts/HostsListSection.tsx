@@ -2,8 +2,9 @@
 
 import { TextInput } from '@/components/inputs/text-input/text-input'
 import { DataTable } from '@/components/table/table'
+import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
-import { GetReservationsItemResponse } from '@/services/api/reservations'
+import { HostsListItemResponse } from '@/services/api/hosts'
 import {
   ColumnDef,
   ColumnFiltersState,
@@ -13,27 +14,28 @@ import {
   useReactTable,
   VisibilityState,
 } from '@tanstack/react-table'
+import { format } from 'date-fns'
 import { ChevronDown, ChevronUp, Search } from 'lucide-react'
 import { useTranslations } from 'next-intl'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { useState } from 'react'
 
-interface ReservationsListSectionProps {
-  data: GetReservationsItemResponse[] | undefined
+interface HostsListSectionProps {
+  data: HostsListItemResponse[] | undefined
   isPending: boolean
   refresh: () => void
 }
 
-export default function ReservationsListSection({
+export default function HostsListSection({
   data,
   isPending,
   refresh,
-}: ReservationsListSectionProps) {
+}: HostsListSectionProps) {
   const t = useTranslations()
   const router = useRouter()
 
-  const columns: ColumnDef<GetReservationsItemResponse>[] = [
+  const columns: ColumnDef<HostsListItemResponse>[] = [
     {
       accessorKey: 'id',
       id: 'id',
@@ -46,9 +48,9 @@ export default function ReservationsListSection({
       },
     },
     {
-      accessorKey: 'reservation_id',
-      id: 'reservation_id',
-      header: ({ column }: any) => {
+      accessorKey: 'name',
+      id: 'name',
+      header: ({ column }) => {
         return (
           <Button
             variant="link"
@@ -56,70 +58,7 @@ export default function ReservationsListSection({
             className="text-utility-gray-600"
             onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
           >
-            {t('columns.reservation_id')}
-            {column.getIsSorted() === 'desc' ? (
-              <ChevronUp className="ml-2 h-3 w-3" />
-            ) : column.getIsSorted() === 'asc' ? (
-              <ChevronDown className="ml-2 h-3 w-3" />
-            ) : null}
-          </Button>
-        )
-      },
-    },
-    {
-      accessorKey: 'date',
-      id: 'date',
-      header: ({ column }: any) => {
-        return (
-          <Button
-            variant="link"
-            color="secondary"
-            className="text-utility-gray-600"
-            onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
-          >
-            {t('columns.date')}
-            {column.getIsSorted() === 'desc' ? (
-              <ChevronUp className="ml-2 h-3 w-3" />
-            ) : column.getIsSorted() === 'asc' ? (
-              <ChevronDown className="ml-2 h-3 w-3" />
-            ) : null}
-          </Button>
-        )
-      },
-    },
-    {
-      accessorKey: 'attendance',
-      id: 'attendance',
-      header: ({ column }: any) => {
-        return (
-          <Button
-            variant="link"
-            color="secondary"
-            className="text-utility-gray-600"
-            onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
-          >
-            {t('columns.attendance')}
-            {column.getIsSorted() === 'desc' ? (
-              <ChevronUp className="ml-2 h-3 w-3" />
-            ) : column.getIsSorted() === 'asc' ? (
-              <ChevronDown className="ml-2 h-3 w-3" />
-            ) : null}
-          </Button>
-        )
-      },
-    },
-    {
-      accessorKey: 'client_name',
-      id: 'client_name',
-      header: ({ column }: any) => {
-        return (
-          <Button
-            variant="link"
-            color="secondary"
-            className="text-utility-gray-600"
-            onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
-          >
-            {t('columns.client_name')}
+            {t('columns.name')}
             {column.getIsSorted() === 'desc' ? (
               <ChevronUp className="ml-2 h-3 w-3" />
             ) : column.getIsSorted() === 'asc' ? (
@@ -130,48 +69,29 @@ export default function ReservationsListSection({
       },
       cell: ({ row }) => {
         return (
-          <Link href={`/client?id=${row.original.client_id}`}>
+          <Link href={`/host?id=${row.original.id}`}>
             <span className="text-sm font-medium text-utility-gray-900">
-              {row.getValue('client_name')}
+              {row.getValue('name')}
             </span>
           </Link>
         )
       },
     },
     {
-      accessorKey: 'host_name',
-      id: 'host_name',
-      header: ({ column }: any) => {
+      accessorKey: 'account_id',
+      id: 'account_id',
+      header: () => {
         return (
-          <Button
-            variant="link"
-            color="secondary"
-            className="text-utility-gray-600"
-            onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
-          >
-            {t('columns.host_name')}
-            {column.getIsSorted() === 'desc' ? (
-              <ChevronUp className="ml-2 h-3 w-3" />
-            ) : column.getIsSorted() === 'asc' ? (
-              <ChevronDown className="ml-2 h-3 w-3" />
-            ) : null}
-          </Button>
-        )
-      },
-      cell: ({ row }) => {
-        return (
-          <Link href={`/host?id=${row.original.host_id}`}>
-            <span className="text-sm font-medium text-utility-gray-900">
-              {row.getValue('host_name')}
-            </span>
-          </Link>
+          <div className="px-3.5 text-sm font-extrabold text-utility-gray-600">
+            {t('columns.account_id')}
+          </div>
         )
       },
     },
     {
-      accessorKey: 'space_name',
-      id: 'space_name',
-      header: ({ column }: any) => {
+      accessorKey: 'email',
+      id: 'email',
+      header: ({ column }) => {
         return (
           <Button
             variant="link"
@@ -179,7 +99,7 @@ export default function ReservationsListSection({
             className="text-utility-gray-600"
             onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
           >
-            {t('columns.space_name')}
+            {t('columns.email')}
             {column.getIsSorted() === 'desc' ? (
               <ChevronUp className="ml-2 h-3 w-3" />
             ) : column.getIsSorted() === 'asc' ? (
@@ -190,9 +110,9 @@ export default function ReservationsListSection({
       },
     },
     {
-      accessorKey: 'amount',
-      id: 'amount',
-      header: ({ column }: any) => {
+      accessorKey: 'phone',
+      id: 'phone',
+      header: ({ column }) => {
         return (
           <Button
             variant="link"
@@ -200,30 +120,20 @@ export default function ReservationsListSection({
             className="text-utility-gray-600"
             onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
           >
-            {t('columns.amount')}
+            {t('columns.phone')}
             {column.getIsSorted() === 'desc' ? (
               <ChevronUp className="ml-2 h-3 w-3" />
             ) : column.getIsSorted() === 'asc' ? (
               <ChevronDown className="ml-2 h-3 w-3" />
             ) : null}
           </Button>
-        )
-      },
-      cell: ({ row }) => {
-        return new Intl.NumberFormat('de-DE', {
-          style: 'currency',
-          currency: 'EUR',
-        }).format(
-          row.getValue('amount')
-            ? parseFloat(row.getValue('amount')) / 100
-            : '0'
         )
       },
     },
     {
-      accessorKey: 'refunded_amount',
-      id: 'refunded_amount',
-      header: ({ column }: any) => {
+      accessorKey: 'locality',
+      id: 'locality',
+      header: ({ column }) => {
         return (
           <Button
             variant="link"
@@ -231,30 +141,20 @@ export default function ReservationsListSection({
             className="text-utility-gray-600"
             onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
           >
-            {t('columns.refunded_amount')}
+            {t('columns.locality')}
             {column.getIsSorted() === 'desc' ? (
               <ChevronUp className="ml-2 h-3 w-3" />
             ) : column.getIsSorted() === 'asc' ? (
               <ChevronDown className="ml-2 h-3 w-3" />
             ) : null}
           </Button>
-        )
-      },
-      cell: ({ row }) => {
-        return new Intl.NumberFormat('de-DE', {
-          style: 'currency',
-          currency: 'EUR',
-        }).format(
-          row.getValue('refunded_amount')
-            ? parseFloat(row.getValue('refunded_amount')) / 100
-            : '0'
         )
       },
     },
     {
-      accessorKey: 'platform_fee_amount',
-      id: 'platform_fee_amount',
-      header: ({ column }: any) => {
+      accessorKey: 'business_type',
+      id: 'business_type',
+      header: ({ column }) => {
         return (
           <Button
             variant="link"
@@ -262,7 +162,7 @@ export default function ReservationsListSection({
             className="text-utility-gray-600"
             onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
           >
-            {t('columns.platform_fee_amount')}
+            {t('columns.business_type')}
             {column.getIsSorted() === 'desc' ? (
               <ChevronUp className="ml-2 h-3 w-3" />
             ) : column.getIsSorted() === 'asc' ? (
@@ -272,20 +172,17 @@ export default function ReservationsListSection({
         )
       },
       cell: ({ row }) => {
-        return new Intl.NumberFormat('de-DE', {
-          style: 'currency',
-          currency: 'EUR',
-        }).format(
-          row.getValue('platform_fee_amount')
-            ? parseFloat(row.getValue('platform_fee_amount')) / 100
-            : '0'
+        return (
+          <Badge shape="square">
+            {t(`business_type.${row.getValue('business_type')}`)}
+          </Badge>
         )
       },
     },
     {
       accessorKey: 'created_at',
       id: 'created_at',
-      header: ({ column }: any) => {
+      header: ({ column }) => {
         return (
           <Button
             variant="link"
@@ -302,14 +199,16 @@ export default function ReservationsListSection({
           </Button>
         )
       },
+      cell: ({ row }) => {
+        return format(new Date(row.getValue('created_at')), 'dd/MM/yyyy HH:mm')
+      },
     },
   ]
 
   const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({
     id: false,
-    attendance: false,
-    refunded_amount: false,
-    platform_fee_amount: false,
+    business_type: false,
+    account_id: false,
   })
 
   const [search, setSearch] = useState<string>('')
