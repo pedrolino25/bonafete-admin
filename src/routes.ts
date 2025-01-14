@@ -132,6 +132,11 @@ export const routes = [
             alias: 'reference-data',
           },
           {
+            title: 'navigation.reference-data-conveniences',
+            path: '/reference-data/conveniences',
+            alias: 'reference-data',
+          },
+          {
             title: 'navigation.reference-data-services-categories',
             path: '/reference-data/services-categories',
             alias: 'reference-data',
