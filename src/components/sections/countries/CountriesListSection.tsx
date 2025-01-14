@@ -52,7 +52,7 @@ export default function CountriesListSection({
       id: 'id',
       header: () => {
         return (
-          <div className="px-3.5 text-sm font-extrabold text-utility-gray-900">
+          <div className="px-3.5 text-sm font-extrabold text-utility-gray-600">
             {t('columns.id')}
           </div>
         )
@@ -66,6 +66,7 @@ export default function CountriesListSection({
           <Button
             variant="link"
             color="secondary"
+            className="text-utility-gray-600"
             onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
           >
             {t('columns.title')}
@@ -86,6 +87,7 @@ export default function CountriesListSection({
           <Button
             variant="link"
             color="secondary"
+            className="text-utility-gray-600"
             onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
           >
             {t('columns.latitude')}
@@ -106,6 +108,7 @@ export default function CountriesListSection({
           <Button
             variant="link"
             color="secondary"
+            className="text-utility-gray-600"
             onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
           >
             {t('columns.longitude')}
@@ -126,6 +129,7 @@ export default function CountriesListSection({
           <Button
             variant="link"
             color="secondary"
+            className="text-utility-gray-600"
             onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
           >
             {t('columns.radius')}
@@ -146,6 +150,7 @@ export default function CountriesListSection({
           <Button
             variant="link"
             color="secondary"
+            className="text-utility-gray-600"
             onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
           >
             {t('columns.url')}

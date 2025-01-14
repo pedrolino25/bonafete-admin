@@ -52,7 +52,7 @@ export default function SpaceTypesListSection({
       id: 'id',
       header: () => {
         return (
-          <div className="px-3.5 text-sm font-extrabold text-utility-gray-900">
+          <div className="px-3.5 text-sm font-extrabold text-utility-gray-600">
             {t('columns.id')}
           </div>
         )
@@ -66,6 +66,7 @@ export default function SpaceTypesListSection({
           <Button
             variant="link"
             color="secondary"
+            className="text-utility-gray-600"
             onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
           >
             {t('columns.label')}
@@ -86,6 +87,7 @@ export default function SpaceTypesListSection({
           <Button
             variant="link"
             color="secondary"
+            className="text-utility-gray-600"
             onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
           >
             {t('columns.image')}
