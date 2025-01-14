@@ -165,11 +165,6 @@ export const routes = [
             path: '/users/employes',
             alias: 'users',
           },
-          {
-            title: 'navigation.users-clients',
-            path: '/users/clients',
-            alias: 'users',
-          },
         ],
       },
       {

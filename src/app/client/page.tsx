@@ -1,24 +1,24 @@
 'use client'
 
 import { Navbar } from '@/components/navigation/Navbar'
-import HostSection from '@/components/sections/host/HostSection'
+import ClientSection from '@/components/sections/client/ClientSection'
 import { Button } from '@/components/ui/button'
-import { getHost } from '@/services/api/hosts'
+import { getClient } from '@/services/api/hosts'
 import { useQuery } from '@tanstack/react-query'
 import { ChevronLeft } from 'lucide-react'
 import { useTranslations } from 'next-intl'
 import { useRouter, useSearchParams } from 'next/navigation'
 
-export default function Host() {
+export default function Client() {
   const t = useTranslations()
   const router = useRouter()
   const params = useSearchParams()
   const id = params.get('id') as string
 
   const { isPending, data, refetch } = useQuery({
-    queryKey: ['host', id],
+    queryKey: ['client', id],
     queryFn: async () => {
-      return await getHost(id)
+      return await getClient(id)
     },
   })
 
@@ -35,7 +35,7 @@ export default function Host() {
         </Button>
       }
     >
-      {data && <HostSection data={data} refetch={refetch} />}
+      {data && <ClientSection data={data} refetch={refetch} />}
     </Navbar>
   )
 }
