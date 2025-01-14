@@ -11,7 +11,7 @@ import {
   DialogTitle,
 } from '@/components/ui/dialog'
 import { ReservationStatus } from '@/lib/utils/consts'
-import { ReservationsInfoResponse } from '@/services/api/hosts'
+import { ClientReservationsInfoResponse } from '@/services/api/hosts'
 import {
   ColumnDef,
   getCoreRowModel,
@@ -30,7 +30,7 @@ import { useRouter } from 'next/navigation'
 import React from 'react'
 
 interface ReservationsListSectionProps {
-  data: ReservationsInfoResponse[]
+  data: ClientReservationsInfoResponse[]
   refetch?: () => void
 }
 
@@ -40,10 +40,11 @@ export default function ReservationsListSection({
 }: ReservationsListSectionProps) {
   const t = useTranslations()
   const router = useRouter()
-  const [selected, setSelected] = React.useState<ReservationsInfoResponse>()
+  const [selected, setSelected] =
+    React.useState<ClientReservationsInfoResponse>()
   const [openView, setOpenView] = React.useState<boolean>(false)
 
-  const columns: ColumnDef<ReservationsInfoResponse>[] = [
+  const columns: ColumnDef<ClientReservationsInfoResponse>[] = [
     {
       accessorKey: 'reservation_id',
       id: 'reservation_id',
@@ -109,8 +110,8 @@ export default function ReservationsListSection({
       },
     },
     {
-      accessorKey: 'client_name',
-      id: 'client_name',
+      accessorKey: 'host_name',
+      id: 'host_name',
       header: ({ column }) => {
         return (
           <Button
@@ -119,7 +120,7 @@ export default function ReservationsListSection({
             className="text-utility-gray-600"
             onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
           >
-            {t('columns.client_name')}
+            {t('columns.host_name')}
             {column.getIsSorted() === 'desc' ? (
               <ChevronUp className="ml-2 h-3 w-3" />
             ) : column.getIsSorted() === 'asc' ? (
@@ -130,9 +131,9 @@ export default function ReservationsListSection({
       },
       cell: ({ row }) => {
         return (
-          <Link href={`/client?id=${row.original.client_id}`}>
+          <Link href={`/host?id=${row.original.host_id}`}>
             <span className="text-sm font-medium text-utility-gray-900">
-              {row.getValue('client_name')}
+              {row.getValue('host_name')}
             </span>
           </Link>
         )
@@ -245,7 +246,7 @@ export default function ReservationsListSection({
     getSortedRowModel: getSortedRowModel(),
     manualSorting: false,
     meta: {
-      viewData: (values: ReservationsInfoResponse) => {
+      viewData: (values: ClientReservationsInfoResponse) => {
         setSelected(values)
         setOpenView(true)
       },
