@@ -1,5 +1,32 @@
 'use client'
 
+import { Navbar } from '@/components/navigation/Navbar'
+import {
+  getReservationsList,
+  ReservationStatus,
+} from '@/services/api/reservations'
+import { useQuery } from '@tanstack/react-query'
+import dynamic from 'next/dynamic'
+const ReservationsListSection = dynamic(
+  () => import('@/components/sections/reservations/ReservationsListSection'),
+  { ssr: false }
+)
+
 export default function Reservations() {
-  return <div />
+  const { isPending, data, refetch } = useQuery({
+    queryKey: ['reservations', ReservationStatus.Confirmed],
+    queryFn: async () => {
+      return await getReservationsList(ReservationStatus.Confirmed)
+    },
+  })
+
+  return (
+    <Navbar>
+      <ReservationsListSection
+        data={data}
+        isPending={isPending}
+        refresh={refetch}
+      />
+    </Navbar>
+  )
 }
