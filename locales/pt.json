@@ -1,6 +1,7 @@
 {
   "company": "Bonafete",
   "app-name": "Portal de Administração",
+  "onboarding-portal": "Portal de Onboarding",
   "signin": {
     "title": "Portal de Administração",
     "subtitle": "Faça login da sua conta",

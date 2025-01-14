@@ -27,15 +27,20 @@ import { cn } from '@/lib/utils'
 import { routes } from '@/routes'
 import { handleSignOut } from '@/services/auth'
 
+import { useAuthenticatedUser } from '@/lib/hooks/authenticated-user'
 import { ChevronRight, ChevronsUpDown, LogOut } from 'lucide-react'
 import { useTranslations } from 'next-intl'
 import Image from 'next/image'
+import Link from 'next/link'
 import { usePathname, useRouter } from 'next/navigation'
 import { ReactNode } from 'react'
+import { Avatar, AvatarFallback } from '../ui/avatar'
 import {
   DropdownMenu,
   DropdownMenuContent,
+  DropdownMenuGroup,
   DropdownMenuItem,
+  DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '../ui/dropdown-menu'
 import { Separator } from '../ui/separator'
@@ -45,6 +50,7 @@ interface NavbarProps {
   topbarActions?: ReactNode
 }
 export function Navbar({ children, topbarActions }: NavbarProps) {
+  const user = useAuthenticatedUser()
   const path = usePathname()
   const router = useRouter()
   const t = useTranslations()
@@ -162,10 +168,67 @@ export function Navbar({ children, topbarActions }: NavbarProps) {
           ))}
         </SidebarContent>
         <SidebarFooter>
-          <SidebarMenuButton tooltip={t('signin.logout')} onClick={signOut}>
-            <LogOut className="h-4 w-4" />
-            <span>{t('signin.logout')}</span>
-          </SidebarMenuButton>
+          <SidebarMenu>
+            <SidebarMenuItem>
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <SidebarMenuButton
+                    size="lg"
+                    className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground"
+                  >
+                    <Avatar>
+                      <AvatarFallback>
+                        {user.name?.substring(0, 1)}
+                      </AvatarFallback>
+                    </Avatar>
+                    <div className="grid flex-1 text-left text-sm leading-tight">
+                      <span className="truncate font-semibold">
+                        {user.name}
+                      </span>
+                      <span className="truncate text-xs">{user.email}</span>
+                    </div>
+                    <ChevronsUpDown className="ml-auto size-4" />
+                  </SidebarMenuButton>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent
+                  className="w-[--radix-dropdown-menu-trigger-width] min-w-56 rounded-lg"
+                  side={'top'}
+                  align="end"
+                  sideOffset={4}
+                >
+                  <DropdownMenuGroup>
+                    <DropdownMenuItem>
+                      <div className="flex aspect-square size-8 items-center justify-center rounded-lg text-sidebar-primary-foreground">
+                        <Image
+                          src={logo}
+                          alt={'logo-image'}
+                          priority
+                          height={20}
+                          width={20}
+                          quality={70}
+                        />
+                      </div>
+                      <Link
+                        href="https://bonafete-onboarding.vercel.app/"
+                        target="_blank"
+                      >
+                        <span className="pl-2 text-sm text-utility-gray-600">
+                          {t('onboarding-portal')}
+                        </span>
+                      </Link>
+                    </DropdownMenuItem>
+                  </DropdownMenuGroup>
+                  <DropdownMenuSeparator />
+                  <DropdownMenuItem onClick={signOut}>
+                    <LogOut className="w-4 h-4 mr-2" />
+                    <span className="text-sm text-utility-gray-600">
+                      {t('signin.logout')}
+                    </span>
+                  </DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
+            </SidebarMenuItem>
+          </SidebarMenu>
         </SidebarFooter>
         <SidebarRail />
       </Sidebar>
