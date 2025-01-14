@@ -89,7 +89,18 @@
     "type": "Tipo",
     "key": "Código",
     "value": "Valor",
-    "category": "Categoria"
+    "category": "Categoria",
+    "reservation_id": "Reserva",
+    "date": "Data",
+    "attendance": "Número de Pessoas",
+    "status": "Estado",
+    "client_name": "Cliente",
+    "host_name": "Anfitrião",
+    "space_name": "Espaço",
+    "amount": "Valor",
+    "refunded_amount": "Reembolso",
+    "platform_fee_amount": "Taxa de Serviço",
+    "created_at": "Criado em"
   },
   "sections": {
     "countries": {
