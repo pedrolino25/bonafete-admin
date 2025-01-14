@@ -526,7 +526,7 @@ export interface ServicesListItemResponse {
   id: string
   key: string
   value: string
-  serviceCategoryId: {
+  serviceCategory: {
     id: string
     key: string
     value: string
@@ -577,7 +577,7 @@ export interface CreateUpdateServicesParams {
   id?: string
   key: string
   value: string
-  serviceCategoryId: { id: string }
+  serviceCategory: { id: string }
 }
 
 const createUpdateService = async (

@@ -4,54 +4,77 @@ import { Button } from '@/components/ui/button'
 import { useTranslations } from 'next-intl'
 import { useRouter } from 'next/navigation'
 
+import { SelectInput } from '@/components/inputs/select-input/select-input'
 import { TextInput } from '@/components/inputs/text-input/text-input'
+import { Option } from '@/components/ui/select'
 import { toast } from '@/lib/hooks/use-toast'
-import { createUpdateServicesCategory } from '@/services/api/reference-data'
+import {
+  createUpdateService,
+  getServicesCategoriesList,
+} from '@/services/api/reference-data'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { useMutation } from '@tanstack/react-query'
+import { useMutation, useQuery } from '@tanstack/react-query'
 import { Send } from 'lucide-react'
 import { useForm } from 'react-hook-form'
 import z from 'zod'
 
-const serviceCategoryFormSchema = z.object({
+const optionSchema = z.object({
+  value: z.string().min(1, 'Value is required'),
+  label: z.string().min(1, 'Label is required'),
+  info: z.string().optional(),
+  node: z.any().optional(),
+  disabled: z.any().optional(),
+})
+
+const serviceFormSchema = z.object({
   id: z.string().optional(),
   key: z.string().min(1),
   value: z.string().min(1),
+  category: z.array(optionSchema).min(1),
 })
 
-export type ServiceCategoryFormType = z.infer<typeof serviceCategoryFormSchema>
+export type ServiceFormType = z.infer<typeof serviceFormSchema>
 
-interface CreateEditServiceCategorySectionProps {
-  defaultValues?: ServiceCategoryFormType
+interface CreateEditServiceSectionProps {
+  defaultValues?: ServiceFormType
 }
 
-export default function CreateEditServiceCategorySection({
+export default function CreateEditServiceSection({
   defaultValues,
-}: CreateEditServiceCategorySectionProps) {
+}: CreateEditServiceSectionProps) {
   const t = useTranslations()
   const router = useRouter()
+
+  const { data: servicesCategories } = useQuery({
+    queryKey: ['services-categories'],
+    queryFn: async () => {
+      return await getServicesCategoriesList()
+    },
+  })
 
   const {
     handleSubmit,
     setValue,
     getValues,
     formState: { isValid },
-  } = useForm<ServiceCategoryFormType>({
+  } = useForm<ServiceFormType>({
     mode: 'onChange',
-    resolver: zodResolver(serviceCategoryFormSchema),
+    resolver: zodResolver(serviceFormSchema),
     defaultValues,
   })
 
-  const onSubmit = (values: ServiceCategoryFormType) => {
-    createUpdateServiceCategoryMutation.mutate({
+  const onSubmit = (values: ServiceFormType) => {
+    console.log(values.category[0]?.value)
+    createUpdateServiceMutation.mutate({
       id: values?.id,
       key: values.key,
       value: values.value,
+      serviceCategory: { id: values.category[0]?.value },
     })
   }
 
-  const createUpdateServiceCategoryMutation = useMutation({
-    mutationFn: createUpdateServicesCategory,
+  const createUpdateServiceMutation = useMutation({
+    mutationFn: createUpdateService,
     onSuccess: () => {
       toast({
         variant: 'success',
@@ -70,10 +93,15 @@ export default function CreateEditServiceCategorySection({
   })
 
   const handleChange =
-    (field: keyof ServiceCategoryFormType) =>
+    (field: keyof ServiceFormType) =>
     (event: React.ChangeEvent<HTMLInputElement>) => {
       const value = event.target.value
       setValue(field, value, { shouldValidate: true, shouldDirty: true })
+    }
+
+  const handleSelectChange =
+    (field: keyof ServiceFormType) => (option: Option[]) => {
+      setValue(field, option, { shouldValidate: true, shouldDirty: true })
     }
 
   return (
@@ -85,13 +113,13 @@ export default function CreateEditServiceCategorySection({
         <div className="w-full">
           <h3 className="text-lg font-semibold text-utility-brand-600">
             {defaultValues
-              ? t('sections.services-category.edit-title')
-              : t('sections.services-category.create-title')}
+              ? t('sections.services.edit-title')
+              : t('sections.services.create-title')}
           </h3>
           <p className="text-sm font-light text-utility-gray-500 pt-1 pr-4">
             {defaultValues
-              ? t('sections.services-category.edit-subtitle')
-              : t('sections.services-category.create-subtitle')}
+              ? t('sections.services.edit-subtitle')
+              : t('sections.services.create-subtitle')}
           </p>
         </div>
         <div className="flex justify-between items-center gap-4 max-sm:justify-end max-sm:items-start max-sm:pt-4 max-sm:w-full">
@@ -105,6 +133,22 @@ export default function CreateEditServiceCategorySection({
         </div>
       </div>
       <div className="w-9/12 max-w-[700px] max-sm:w-full gap-4 pt-8 pl-6 max-sm:pl-0 pb-12 grid grid-cols-1">
+        <SelectInput
+          required
+          data-testid="category"
+          label={t('columns.category')}
+          placeholder={t('columns.category')}
+          options={
+            servicesCategories?.map((item) => {
+              return {
+                value: item.id,
+                label: item.value,
+              }
+            }) || []
+          }
+          value={getValues().category}
+          onSelect={handleSelectChange('category')}
+        />
         <TextInput
           required
           label={t('columns.key')}

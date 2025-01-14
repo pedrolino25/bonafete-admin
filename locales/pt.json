@@ -88,7 +88,8 @@
     "description": "Descrição",
     "type": "Tipo",
     "key": "Código",
-    "value": "Valor"
+    "value": "Valor",
+    "category": "Categoria"
   },
   "sections": {
     "countries": {
@@ -132,6 +133,12 @@
       "create-title": "Criar Categoria de Serviço",
       "edit-subtitle": "Insira as informações necessárias para editar a categoria de serviço",
       "create-subtitle": "Insira as informações necessárias para criar a categoria de serviço"
+    },
+    "services": {
+      "edit-title": "Editar Serviço",
+      "create-title": "Criar Serviço",
+      "edit-subtitle": "Insira as informações necessárias para editar o serviço",
+      "create-subtitle": "Insira as informações necessárias para criar o serviço"
     }
   },
   "error": "Erro",
