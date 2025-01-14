@@ -32,6 +32,7 @@ declare module '@tanstack/react-table' {
     deleteData?: (data: TData) => void
     editData?: (data: TData) => void
     viewData?: (data: TData) => void
+    publishData?: (data: TData) => void
     archiveData?: (data: TData) => void
     assign?: (data: TData) => void
     viewHost?: (id: string) => void
@@ -58,6 +59,7 @@ interface TableProps<TData, TValue> {
   hasMore?: boolean
   getMore?: () => void
   scrollToTop?: boolean
+  className?: string
 }
 
 function Table<TData, TValue>({
@@ -67,6 +69,7 @@ function Table<TData, TValue>({
   hasMore,
   getMore,
   scrollToTop,
+  className,
 }: TableProps<TData, TValue>) {
   const t = useTranslations()
   const scrollableContainerRef = useRef(null)
@@ -106,7 +109,10 @@ function Table<TData, TValue>({
   return (
     <div
       ref={scrollableContainerRef}
-      className="max-h-[calc(100vh-160px)] overflow-auto bg-white border-t-0 px-4 max-sm:px-2"
+      className={cn(
+        'max-h-[calc(100vh-160px)] overflow-auto bg-white border-t-0 px-4 max-sm:px-2',
+        className
+      )}
     >
       <ShadcnTable data-testid="table">
         <TableHeader data-testid="table-header">

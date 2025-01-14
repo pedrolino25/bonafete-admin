@@ -87,6 +87,18 @@ export default function HostsListSection({
           </div>
         )
       },
+      cell: ({ row }) => {
+        return (
+          <Link
+            href={`https://dashboard.stripe.com/connect/accounts/${row.original.account_id}/activity`}
+            target="_blank"
+          >
+            <span className="text-sm font-medium text-utility-gray-900">
+              {row.getValue('account_id')}
+            </span>
+          </Link>
+        )
+      },
     },
     {
       accessorKey: 'email',

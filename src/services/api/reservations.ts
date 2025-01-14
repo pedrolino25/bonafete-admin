@@ -3,13 +3,6 @@ import { Cookies } from '../auth'
 
 const ROOT = process.env.NEXT_PUBLIC_API_URL
 
-export enum ReservationStatus {
-  Confirmed = 'confirmed',
-  CancelledByHost = 'cancelled-by-host',
-  CancelledByClient = 'cancelled-by-client',
-  Pending = 'pending',
-}
-
 export interface GetReservationsItemResponse {
   id: string
   reservation_id: string
@@ -26,13 +19,19 @@ export interface GetReservationsItemResponse {
   refunded_amount: string
   platform_fee_amount: string
   created_at: string
+  charge_id: string
+  platform_stripe_fee: string
+  net: string
+  payment_id: string
+  payment_date: string
+  line_items: string
 }
 
 const getReservationsList = async (
   status: string
 ): Promise<GetReservationsItemResponse[]> => {
   const response = await fetch(
-    `${ROOT}/api/reservations/admin-reservations?status=${status}`,
+    `${ROOT}/api/admin/reservations?status=${status}`,
     {
       method: 'GET',
       headers: {
