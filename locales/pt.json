@@ -39,6 +39,7 @@
     "reservations-confirmed": "Confirmadas",
     "reservations-canceled": "Canceladas",
     "reservations-pending": "Pendentes",
+    "reservations-availability-verifications": "Disponibilidade",
     "users": "Utilizadores",
     "user-management": "Gestão de Utilizadores",
     "users-employes": "Colaboradores",
@@ -57,12 +58,14 @@
     "publish-space": "Publicar espaço",
     "spaces": "Espaços",
     "reservations": "Reservas",
-    "view-reservation": "Dados de Pagamento"
+    "view-reservation": "Dados de Pagamento",
+    "view-conversation": "Conversa"
   },
   "subtitles": {
     "remove": "Tem a certeza que deseja eliminar o registo?",
     "archive-space": "Tem a certeza que deseja arquivar o espaço?",
-    "publish-space": "Tem a certeza que deseja publicar o espaço?"
+    "publish-space": "Tem a certeza que deseja publicar o espaço?",
+    "empty-messages": "Não existem mensagens"
   },
   "button-actions": {
     "cancel": "Cancelar",
@@ -120,7 +123,8 @@
     "business_type": "Empresa",
     "account_id": "Stripe ID",
     "phone": "Contacto",
-    "email": "Email"
+    "email": "Email",
+    "space_visit": "Visita"
   },
   "business_model": {
     "only-space": "Aluguer",
@@ -232,6 +236,16 @@
     "pending": "Pendente",
     "cancelled-by-host": "Cancelada por anfitrião",
     "cancelled-by-client": "Cancelada por cliente"
+  },
+  "availability-verification-status": {
+    "unknown": "Por responder",
+    "not-available": "Não disponível",
+    "available": "Disponível"
+  },
+  "space-visits-status": {
+    "scheduled": "Agendada",
+    "reservation": "Reservado",
+    "canceled": "Cancelada"
   },
   "space-status": {
     "pending": "Pendente",

@@ -43,4 +43,48 @@ const getReservationsList = async (
   return response.json()
 }
 
-export { getReservationsList }
+export interface GetAllAvailabiltyVerificationsWithChatItemResponse {
+  id: string
+  date: string
+  number_of_persons: string
+  status: string
+  created_at: string
+  user: {
+    id: string
+    name: string
+  }
+  space_visit?: {
+    date: string
+    status: string
+  }
+  chat: {
+    id: string
+    messages: {
+      from: {
+        id: string
+        name: string
+      }
+      to: {
+        id: string
+        name: string
+      }
+      message: string
+      created_at: string
+    }[]
+  }
+}
+
+const getAvailabilityVerificationsList = async (): Promise<
+  GetAllAvailabiltyVerificationsWithChatItemResponse[]
+> => {
+  const response = await fetch(`${ROOT}/api/admin/availability-verifications`, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+      Autorization: getCookie(Cookies.SESSION_COOKIE) as string,
+    },
+  })
+  return response.json()
+}
+
+export { getAvailabilityVerificationsList, getReservationsList }
