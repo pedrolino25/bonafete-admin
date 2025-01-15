@@ -239,7 +239,7 @@
   },
   "availability-verification-status": {
     "unknown": "Por responder",
-    "not-available": "Não disponível",
+    "not-available": "Indisponível",
     "available": "Disponível"
   },
   "space-visits-status": {
