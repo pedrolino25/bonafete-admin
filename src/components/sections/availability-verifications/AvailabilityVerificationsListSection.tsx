@@ -1,6 +1,7 @@
 'use client'
 
 import { TextInput } from '@/components/inputs/text-input/text-input'
+import { AvailabilityVerificationsListFilterMenu } from '@/components/menus/AvailabilityVerificationsListFilterMenu'
 import { DataTable } from '@/components/table/table'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
@@ -28,6 +29,7 @@ import {
 import {
   ChevronDown,
   ChevronUp,
+  Filter,
   MessageCircle,
   MessageCircleWarning,
   Search,
@@ -51,6 +53,7 @@ export default function AvailabilityVerificationsListSection({
   const [selected, setSelected] =
     React.useState<GetAllAvailabiltyVerificationsWithChatItemResponse>()
   const [openView, setOpenView] = React.useState<boolean>(false)
+  const [openFilters, setOpenFilters] = useState<boolean>(false)
 
   const columns: ColumnDef<GetAllAvailabiltyVerificationsWithChatItemResponse>[] =
     [
@@ -311,6 +314,11 @@ export default function AvailabilityVerificationsListSection({
     },
   })
 
+  const handleFilters = (filters: ColumnFiltersState) => {
+    setColumnFilters(filters)
+    setOpenFilters(false)
+  }
+
   const blockMessageMutation = useMutation({
     mutationFn: blockMessage,
     onSuccess: () => {
@@ -355,13 +363,30 @@ export default function AvailabilityVerificationsListSection({
                 data-testid="search-input"
               />
             </div>
+            <Button
+              color="secondary"
+              startAdornment={<Filter className="h-4 w-4" />}
+              data-testid="filters-button"
+              onClick={() => setOpenFilters(true)}
+              disabled={!data || data.length === 0}
+            >
+              <span className="max-sm:hidden">{t('table.filters')}</span>
+            </Button>
             <DataTable.ColumnVisibilityDropdown table={table} />
           </div>
         </DataTable.HeaderActionsContainer>
       </DataTable.HeaderContainer>
       <DataTable.Table table={table} columns={columns} isLoading={isPending} />
+      {data && data.length > 0 && (
+        <AvailabilityVerificationsListFilterMenu
+          open={openFilters}
+          onOpenChange={setOpenFilters}
+          submit={handleFilters}
+          data={data || []}
+        />
+      )}
       <Dialog open={openView} onOpenChange={setOpenView}>
-        <DialogContent className="sm:max-w-[700px]">
+        <DialogContent className="sm:max-w-[700px] max-sm:max-w-100svw">
           <DialogHeader>
             <DialogTitle>{t('titles.view-conversation')}</DialogTitle>
             <DialogDescription className="pt-4 pb-2">
@@ -393,7 +418,7 @@ export default function AvailabilityVerificationsListSection({
                                       })
                                     }}
                                   >
-                                    Bloquear
+                                    {t('button-actions.block')}
                                   </Button>
                                 </div>
                               ) : (
