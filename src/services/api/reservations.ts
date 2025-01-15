@@ -59,7 +59,10 @@ export interface GetAllAvailabiltyVerificationsWithChatItemResponse {
   }
   chat: {
     id: string
+    pending: number
+    count: number
     messages: {
+      id: string
       from: {
         id: string
         name: string
@@ -69,6 +72,7 @@ export interface GetAllAvailabiltyVerificationsWithChatItemResponse {
         name: string
       }
       message: string
+      status: string
       created_at: string
     }[]
   }

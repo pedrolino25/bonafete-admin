@@ -252,5 +252,10 @@
     "published": "Ativo",
     "archived": "Arquivado",
     "draft": "Rascunho"
+  },
+  "reasons": {
+    "sharing-contacts": "conter partilha de contactos",
+    "ofensive-language": "conter linguagem imprópria ou ofensiva",
+    "not-succinct": "ser pouco sucinta"
   }
 }
