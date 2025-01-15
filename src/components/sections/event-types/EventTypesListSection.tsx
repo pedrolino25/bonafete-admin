@@ -241,7 +241,7 @@ export default function EventTypesListSection({
       </DataTable.HeaderContainer>
       <DataTable.Table table={table} columns={columns} isLoading={isPending} />
       <Dialog open={openRemove} onOpenChange={setOpenRemove}>
-        <DialogContent className="sm:max-w-[425px]">
+        <DialogContent className="sm:max-w-[425px] max-sm:max-w-100svw">
           <DialogHeader>
             <DialogTitle>{t('titles.remove')}</DialogTitle>
             <DialogDescription className="pt-2 pb-6">
