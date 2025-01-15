@@ -25,6 +25,7 @@ const optionSchema = z.object({
 const availabilityVerificationsListFilterFormSchema = z.object({
   status: z.array(optionSchema).optional(),
   visit_status: z.array(optionSchema).optional(),
+  host_name: z.array(optionSchema).optional(),
 })
 
 export type AvailabilityVerificationsListFilterFormType = z.infer<
@@ -69,8 +70,21 @@ export function AvailabilityVerificationsListFilterMenu({
     return options
   }
 
+  const getHostOptions = (): Option[] => {
+    const modelSet = new Set<string>()
+    data.forEach((item) => {
+      if (item.host_name) modelSet.add(item.host_name)
+    })
+    const options: Option[] = Array.from(modelSet).map((item) => ({
+      value: item,
+      label: item,
+    }))
+    return options
+  }
+
   const [statusOptions] = useState<Option[]>(getStatusOptions())
   const [visitStatusOptions] = useState<Option[]>(getVisitStatusOptions())
+  const [hostOptions] = useState<Option[]>(getHostOptions())
 
   const {
     handleSubmit,
@@ -138,6 +152,14 @@ export function AvailabilityVerificationsListFilterMenu({
               options={visitStatusOptions}
               value={getValues().visit_status}
               onSelect={handleSelectChange('visit_status')}
+            />
+            <SelectInput
+              data-testid="visit_status"
+              label={t('columns.host_name')}
+              placeholder={t('table.select-from-list')}
+              options={hostOptions}
+              value={getValues().host_name}
+              onSelect={handleSelectChange('host_name')}
             />
           </div>
           <div className="flex gap-4 py-6">

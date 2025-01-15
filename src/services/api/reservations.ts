@@ -49,10 +49,10 @@ export interface GetAllAvailabiltyVerificationsWithChatItemResponse {
   number_of_persons: string
   status: string
   created_at: string
-  user: {
-    id: string
-    name: string
-  }
+  client_id: string
+  client_name: string
+  host_id: string
+  host_name: string
   space_visit_status: string
   space_visit_date: string
   chat: {
