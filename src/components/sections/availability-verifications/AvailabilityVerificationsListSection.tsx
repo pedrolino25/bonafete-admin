@@ -176,24 +176,24 @@ export default function AvailabilityVerificationsListSection({
           return (
             <>
               {row.original.space_visit?.date && (
-                <div className="flex gap-2 items-center">
-                  <span className="text-sm font-light text-utility-gray-900">
-                    {row.original.space_visit?.date}
-                  </span>
-                  <Badge
-                    color={
-                      row.original.space_visit?.status === 'canceled'
-                        ? 'error'
-                        : row.original.space_visit?.status === 'reservation'
-                        ? 'success'
-                        : 'white'
-                    }
-                  >
+                <Badge
+                  color={
+                    row.original.space_visit?.status === 'canceled'
+                      ? 'error'
+                      : row.original.space_visit?.status === 'reservation'
+                      ? 'success'
+                      : 'white'
+                  }
+                >
+                  <div className="flex gap-4 items-center">
+                    <span className="text-sm font-light text-utility-gray-900">
+                      {row.original.space_visit?.date}
+                    </span>
                     {t(
                       `space-visits-status.${row.original.space_visit?.status}`
                     )}
-                  </Badge>
-                </div>
+                  </div>
+                </Badge>
               )}
             </>
           )
@@ -235,12 +235,31 @@ export default function AvailabilityVerificationsListSection({
           }
 
           return (
-            <div className="inline-flex gap-x-[4px] items-center justify-end w-[100%]">
+            <div className="inline-flex gap-x-[4px] items-center justify-end w-[100%] relative">
               <Button
                 className="px-3"
                 onClick={() => handleClick('view')}
                 color="secondary"
                 size="xs"
+                endAdornment={
+                  <>
+                    {row.original.chat.messages?.filter(
+                      (item) => item.message !== '#verify-availability'
+                    ).length > 0 && (
+                      <Badge
+                        color={'error'}
+                        size="sm"
+                        className="absolute right-[-10px] bottom-[-10px]"
+                      >
+                        {
+                          row.original.chat.messages?.filter(
+                            (item) => item.message !== '#verify-availability'
+                          ).length
+                        }
+                      </Badge>
+                    )}
+                  </>
+                }
               >
                 <MessageCircle className="w-4 h-4" />
               </Button>
