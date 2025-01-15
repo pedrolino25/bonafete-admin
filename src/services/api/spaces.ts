@@ -19,16 +19,13 @@ export interface SpaceListItemResponse {
 const getSpacesListByStatus = async (
   status: SpaceStatus
 ): Promise<SpaceListItemResponse[]> => {
-  const response = await fetch(
-    `${ROOT}/api/onboarding/spaces-list?status=${status}`,
-    {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-        Autorization: getCookie(Cookies.SESSION_COOKIE) as string,
-      },
-    }
-  )
+  const response = await fetch(`${ROOT}/api/space/list?status=${status}`, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+      Autorization: getCookie(Cookies.SESSION_COOKIE) as string,
+    },
+  })
   return response.json()
 }
 

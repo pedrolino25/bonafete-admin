@@ -18,16 +18,13 @@ export interface HostsListItemResponse {
 const getHostsListByStatus = async (
   status: HostStatus
 ): Promise<HostsListItemResponse[]> => {
-  const response = await fetch(
-    `${ROOT}/api/onboarding/hosts-list?status=${status}`,
-    {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-        Autorization: getCookie(Cookies.SESSION_COOKIE) as string,
-      },
-    }
-  )
+  const response = await fetch(`${ROOT}/api/host/list?status=${status}`, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+      Autorization: getCookie(Cookies.SESSION_COOKIE) as string,
+    },
+  })
   return response.json()
 }
 
