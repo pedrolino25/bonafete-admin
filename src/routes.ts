@@ -93,6 +93,11 @@ export const routes = [
             path: '/reservations/pending',
             alias: 'reservations',
           },
+          {
+            title: 'navigation.reservations-availability-verifications',
+            path: '/reservations/availability-verifications',
+            alias: 'reservations',
+          },
         ],
       },
     ],
