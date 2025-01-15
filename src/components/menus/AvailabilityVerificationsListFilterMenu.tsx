@@ -117,6 +117,14 @@ export function AvailabilityVerificationsListFilterMenu({
         value: values.visit_status[0].value,
       })
     }
+
+    if (values.host_name && values.host_name[0]) {
+      filter.push({
+        id: 'host_name',
+        value: values.host_name[0].value,
+      })
+    }
+
     submit(filter)
   }
 
@@ -126,6 +134,7 @@ export function AvailabilityVerificationsListFilterMenu({
       shouldDirty: true,
     })
     setValue('visit_status', [], { shouldDirty: true })
+    setValue('host_name', [], { shouldDirty: true })
     submit([])
   }
 
@@ -154,7 +163,7 @@ export function AvailabilityVerificationsListFilterMenu({
               onSelect={handleSelectChange('visit_status')}
             />
             <SelectInput
-              data-testid="visit_status"
+              data-testid="host_name"
               label={t('columns.host_name')}
               placeholder={t('table.select-from-list')}
               options={hostOptions}
