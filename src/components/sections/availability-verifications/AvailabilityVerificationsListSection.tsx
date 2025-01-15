@@ -149,7 +149,7 @@ export default function AvailabilityVerificationsListSection({
           return (
             <Badge
               color={
-                row.getValue('status') === 'not-available'
+                row.getValue('status') === 'reserved'
                   ? 'error'
                   : row.getValue('status') === 'available'
                   ? 'success'
@@ -162,8 +162,8 @@ export default function AvailabilityVerificationsListSection({
         },
       },
       {
-        accessorKey: 'space_visit',
-        id: 'space_visit',
+        accessorKey: 'space_visit_status',
+        id: 'space_visit_status',
         header: ({ column }: any) => {
           return (
             <Button
@@ -186,23 +186,21 @@ export default function AvailabilityVerificationsListSection({
         cell: ({ row }) => {
           return (
             <>
-              {row.original.space_visit?.date && (
+              {row.original.space_visit_status && (
                 <Badge
                   color={
-                    row.original.space_visit?.status === 'canceled'
+                    row.original.space_visit_status === 'canceled'
                       ? 'error'
-                      : row.original.space_visit?.status === 'reservation'
+                      : row.original.space_visit_status === 'reservation'
                       ? 'success'
                       : 'white'
                   }
                 >
                   <div className="flex gap-4 items-center">
                     <span className="text-sm font-light text-utility-gray-900">
-                      {row.original.space_visit?.date}
+                      {row.original.space_visit_date}
                     </span>
-                    {t(
-                      `space-visits-status.${row.original.space_visit?.status}`
-                    )}
+                    {t(`space-visits-status.${row.original.space_visit_date}`)}
                   </div>
                 </Badge>
               )}

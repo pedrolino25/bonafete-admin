@@ -53,10 +53,8 @@ export interface GetAllAvailabiltyVerificationsWithChatItemResponse {
     id: string
     name: string
   }
-  space_visit?: {
-    date: string
-    status: string
-  }
+  space_visit_status: string
+  space_visit_date: string
   chat: {
     id: string
     pending: number

@@ -60,7 +60,7 @@ export function AvailabilityVerificationsListFilterMenu({
   const getVisitStatusOptions = (): Option[] => {
     const modelSet = new Set<string>()
     data.forEach((item) => {
-      if (item.space_visit?.status) modelSet.add(item.space_visit?.status)
+      if (item.space_visit_status) modelSet.add(item.space_visit_status)
     })
     const options: Option[] = Array.from(modelSet).map((item) => ({
       value: item,
@@ -98,7 +98,10 @@ export function AvailabilityVerificationsListFilterMenu({
     }
 
     if (values.visit_status && values.visit_status[0]) {
-      filter.push({ id: 'visit_status', value: values.visit_status[0].value })
+      filter.push({
+        id: 'space_visit_status',
+        value: values.visit_status[0].value,
+      })
     }
     submit(filter)
   }
