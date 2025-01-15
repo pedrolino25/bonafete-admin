@@ -125,7 +125,8 @@
     "account_id": "Stripe ID",
     "phone": "Contacto",
     "email": "Email",
-    "space_visit": "Visita"
+    "space_visit": "Visita",
+    "space_visit_status": "Visita"
   },
   "business_model": {
     "only-space": "Aluguer",
