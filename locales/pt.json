@@ -75,7 +75,8 @@
     "publish": "Publicar",
     "archive": "Arquivar",
     "manage": "Gerir",
-    "confirm": "Confirmar"
+    "confirm": "Confirmar",
+    "block": "Bloquear"
   },
   "table": {
     "search": "Pesquisar",

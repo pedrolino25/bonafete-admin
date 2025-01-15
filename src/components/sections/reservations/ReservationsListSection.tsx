@@ -414,7 +414,7 @@ export default function ReservationsListSection({
       </DataTable.HeaderContainer>
       <DataTable.Table table={table} columns={columns} isLoading={isPending} />
       <Dialog open={openView} onOpenChange={setOpenView}>
-        <DialogContent className="sm:max-w-[700px]">
+        <DialogContent className="sm:max-w-[700px] max-sm:max-w-100svw">
           <DialogHeader>
             <DialogTitle>{t('titles.view-reservation')}</DialogTitle>
             <DialogDescription className="pt-4 pb-2">

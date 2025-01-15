@@ -266,7 +266,7 @@ export default function ReservationsListSection({
           className="max-h-[370px]"
         />
         <Dialog open={openView} onOpenChange={setOpenView}>
-          <DialogContent className="sm:max-w-[700px]">
+          <DialogContent className="sm:max-w-[700px] max-sm:max-w-100svw">
             <DialogHeader>
               <DialogTitle>{t('titles.view-reservation')}</DialogTitle>
               <DialogDescription className="pt-4 pb-2">
