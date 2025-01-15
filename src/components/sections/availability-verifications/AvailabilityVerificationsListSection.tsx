@@ -147,7 +147,7 @@ export default function AvailabilityVerificationsListSection({
         },
         cell: ({ row }) => {
           return (
-            <Link href={`/client?id=${row.original.host_id}`}>
+            <Link href={`/host?id=${row.original.host_id}`}>
               <span className="text-sm font-medium text-utility-gray-900">
                 {row.original.host_name}
               </span>
@@ -432,8 +432,8 @@ export default function AvailabilityVerificationsListSection({
                                 {msg.from.name}
                               </p>
                               {msg.status === 'pending' ? (
-                                <div className="flex gap-4 items-center">
-                                  <p className="text-utility-error-700">
+                                <div className="flex gap-4 items-center max-sm:flex-col">
+                                  <p className="text-utility-error-700 text-wraps">
                                     {msg.message}
                                   </p>
                                   <Button
