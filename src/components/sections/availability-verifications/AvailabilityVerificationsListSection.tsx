@@ -200,7 +200,9 @@ export default function AvailabilityVerificationsListSection({
                     <span className="text-sm font-light text-utility-gray-900">
                       {row.original.space_visit_date}
                     </span>
-                    {t(`space-visits-status.${row.original.space_visit_date}`)}
+                    {t(
+                      `space-visits-status.${row.original.space_visit_status}`
+                    )}
                   </div>
                 </Badge>
               )}
