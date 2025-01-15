@@ -92,8 +92,8 @@ export default function AvailabilityVerificationsListSection({
         },
       },
       {
-        accessorKey: 'name',
-        id: 'name',
+        accessorKey: 'client_name',
+        id: 'client_name',
         header: ({ column }: any) => {
           return (
             <Button
@@ -104,7 +104,7 @@ export default function AvailabilityVerificationsListSection({
                 column.toggleSorting(column.getIsSorted() === 'asc')
               }
             >
-              {t('columns.name')}
+              {t('columns.client_name')}
               {column.getIsSorted() === 'desc' ? (
                 <ChevronUp className="ml-2 h-3 w-3" />
               ) : column.getIsSorted() === 'asc' ? (
@@ -115,9 +115,41 @@ export default function AvailabilityVerificationsListSection({
         },
         cell: ({ row }) => {
           return (
-            <Link href={`/client?id=${row.original.user.id}`}>
+            <Link href={`/client?id=${row.original.client_id}`}>
               <span className="text-sm font-medium text-utility-gray-900">
-                {row.original.user.name}
+                {row.original.client_name}
+              </span>
+            </Link>
+          )
+        },
+      },
+      {
+        accessorKey: 'host_name',
+        id: 'host_name',
+        header: ({ column }: any) => {
+          return (
+            <Button
+              variant="link"
+              color="secondary"
+              className="text-utility-gray-600"
+              onClick={() =>
+                column.toggleSorting(column.getIsSorted() === 'asc')
+              }
+            >
+              {t('columns.host_name')}
+              {column.getIsSorted() === 'desc' ? (
+                <ChevronUp className="ml-2 h-3 w-3" />
+              ) : column.getIsSorted() === 'asc' ? (
+                <ChevronDown className="ml-2 h-3 w-3" />
+              ) : null}
+            </Button>
+          )
+        },
+        cell: ({ row }) => {
+          return (
+            <Link href={`/client?id=${row.original.host_id}`}>
+              <span className="text-sm font-medium text-utility-gray-900">
+                {row.original.host_name}
               </span>
             </Link>
           )
@@ -278,9 +310,7 @@ export default function AvailabilityVerificationsListSection({
 
   const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({
     id: false,
-    attendance: false,
-    refunded_amount: false,
-    platform_fee_amount: false,
+    host_name: false,
   })
 
   const [search, setSearch] = useState<string>('')
