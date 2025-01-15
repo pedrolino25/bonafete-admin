@@ -11,7 +11,11 @@ import {
   DialogHeader,
   DialogTitle,
 } from '@/components/ui/dialog'
+import { toast } from '@/lib/hooks/use-toast'
+import { BlockMessageReason } from '@/lib/utils/consts'
+import { blockMessage } from '@/services/api/messages'
 import { GetAllAvailabiltyVerificationsWithChatItemResponse } from '@/services/api/reservations'
+import { useMutation } from '@tanstack/react-query'
 import {
   ColumnDef,
   ColumnFiltersState,
@@ -21,10 +25,15 @@ import {
   useReactTable,
   VisibilityState,
 } from '@tanstack/react-table'
-import { ChevronDown, ChevronUp, MessageCircle, Search } from 'lucide-react'
+import {
+  ChevronDown,
+  ChevronUp,
+  MessageCircle,
+  MessageCircleWarning,
+  Search,
+} from 'lucide-react'
 import { useTranslations } from 'next-intl'
 import Link from 'next/link'
-import { useRouter } from 'next/navigation'
 import React, { useState } from 'react'
 
 interface AvailabilityVerificationsListSectionProps {
@@ -39,7 +48,6 @@ export default function AvailabilityVerificationsListSection({
   refresh,
 }: AvailabilityVerificationsListSectionProps) {
   const t = useTranslations()
-  const router = useRouter()
   const [selected, setSelected] =
     React.useState<GetAllAvailabiltyVerificationsWithChatItemResponse>()
   const [openView, setOpenView] = React.useState<boolean>(false)
@@ -235,34 +243,28 @@ export default function AvailabilityVerificationsListSection({
           }
 
           return (
-            <div className="inline-flex gap-x-[4px] items-center justify-end w-[100%] relative">
-              <Button
-                className="px-3"
-                onClick={() => handleClick('view')}
-                color="secondary"
-                size="xs"
-                endAdornment={
-                  <>
-                    {row.original.chat.messages?.filter(
-                      (item) => item.message !== '#verify-availability'
-                    ).length > 0 && (
-                      <Badge
-                        color={'error'}
-                        size="sm"
-                        className="absolute right-[-10px] bottom-[-10px]"
-                      >
-                        {
-                          row.original.chat.messages?.filter(
-                            (item) => item.message !== '#verify-availability'
-                          ).length
-                        }
-                      </Badge>
-                    )}
-                  </>
-                }
-              >
-                <MessageCircle className="w-4 h-4" />
-              </Button>
+            <div className="inline-flex gap-x-[4px] items-center justify-end w-[100%]">
+              {row.original.chat.pending > 0 ? (
+                <Button
+                  className="px-3"
+                  onClick={() => handleClick('view')}
+                  color="destructive"
+                  variant="outline"
+                  size="xs"
+                >
+                  <MessageCircleWarning className="w-4 h-4" />
+                </Button>
+              ) : (
+                <Button
+                  className="px-3"
+                  onClick={() => handleClick('view')}
+                  color="secondary"
+                  size="xs"
+                  disabled={row.original.chat.count === 0}
+                >
+                  <MessageCircle className="w-4 h-4" />
+                </Button>
+              )}
             </div>
           )
         },
@@ -309,6 +311,26 @@ export default function AvailabilityVerificationsListSection({
     },
   })
 
+  const blockMessageMutation = useMutation({
+    mutationFn: blockMessage,
+    onSuccess: () => {
+      toast({
+        variant: 'success',
+        title: t('success'),
+        description: t('success-messages.submit'),
+      })
+      setOpenView(false)
+      refresh()
+    },
+    onError: () => {
+      toast({
+        variant: 'destructive',
+        title: t('error'),
+        description: t('error-messages.submit'),
+      })
+    },
+  })
+
   return (
     <main>
       <DataTable.HeaderContainer>
@@ -348,15 +370,38 @@ export default function AvailabilityVerificationsListSection({
                   <div className="w-full text-left">
                     <div className="w-full flex flex-col max-h-[calc(100svh-100px)] overflow-auto">
                       {selected.chat.messages.length > 0 ? (
-                        selected.chat.messages.map((msg) => {
+                        selected.chat.messages.map((msg, index) => {
                           return (
-                            <div className="w-full mt-4">
+                            <div className="w-full mt-4" key={index}>
                               <p className="font-bold text-utility-gray-700">
                                 {msg.from.name}
                               </p>
-                              <p className="text-utility-gray-700">
-                                {msg.message}
-                              </p>
+                              {msg.status === 'pending' ? (
+                                <div className="flex gap-4 items-center">
+                                  <p className="text-utility-error-700">
+                                    {msg.message}
+                                  </p>
+                                  <Button
+                                    variant="link"
+                                    color="destructive"
+                                    size="xs"
+                                    onClick={() => {
+                                      blockMessageMutation.mutate({
+                                        id: msg.id,
+                                        reason:
+                                          BlockMessageReason.SharingContacts,
+                                      })
+                                    }}
+                                  >
+                                    Bloquear
+                                  </Button>
+                                </div>
+                              ) : (
+                                <p className="text-utility-gray-700">
+                                  {msg.message}
+                                </p>
+                              )}
+
                               <p className="text-xs mt-1">{msg.created_at}</p>
                             </div>
                           )

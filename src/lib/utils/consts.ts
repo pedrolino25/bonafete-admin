@@ -18,3 +18,9 @@ export enum ReservationStatus {
   CancelledByClient = 'cancelled-by-client',
   CancelledByHost = 'cancelled-by-host',
 }
+
+export enum BlockMessageReason {
+  SharingContacts = 'sharing-contacts',
+  OfensiveLanguage = 'ofensive-language',
+  NotSuccinct = 'not-succinct',
+}
