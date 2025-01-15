@@ -37,7 +37,7 @@ interface UpdateSpaceStatusProps {
 const updateSpaceStatus = async (
   data: UpdateSpaceStatusProps
 ): Promise<SpaceListItemResponse> => {
-  const response = await fetch(`${ROOT}/api/onboarding/space-status`, {
+  const response = await fetch(`${ROOT}/api/space/status`, {
     method: 'PUT',
     headers: {
       'Content-Type': 'application/json',
