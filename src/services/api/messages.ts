@@ -18,6 +18,11 @@ const blockMessage = async (data: BlockMessageParams): Promise<void> => {
     },
     body: JSON.stringify(data),
   })
+
+  if (!response.ok) {
+    const error = await response.json()
+    throw new Error(error.message)
+  }
   return response.json()
 }
 
