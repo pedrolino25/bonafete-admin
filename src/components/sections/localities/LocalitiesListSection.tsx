@@ -14,7 +14,7 @@ import {
 import { useToast } from '@/lib/hooks/use-toast'
 import {
   deleteLocality,
-  GetLocalitiesItemResponse,
+  LocalityListItemResponse,
 } from '@/services/api/reference-data'
 import { useMutation } from '@tanstack/react-query'
 import {
@@ -32,7 +32,7 @@ import { useRouter } from 'next/navigation'
 import { useState } from 'react'
 
 interface LocalitiesListSectionProps {
-  data: GetLocalitiesItemResponse[] | undefined
+  data: LocalityListItemResponse[] | undefined
   isPending: boolean
   refresh: () => void
 }
@@ -46,7 +46,7 @@ export default function LocalitiesListSection({
   const router = useRouter()
   const { toast } = useToast()
 
-  const columns: ColumnDef<GetLocalitiesItemResponse>[] = [
+  const columns: ColumnDef<LocalityListItemResponse>[] = [
     {
       accessorKey: 'id',
       id: 'id',
@@ -192,7 +192,7 @@ export default function LocalitiesListSection({
     },
   ]
 
-  const [selected, setSelected] = useState<GetLocalitiesItemResponse>()
+  const [selected, setSelected] = useState<LocalityListItemResponse>()
   const [openRemove, setOpenRemove] = useState<boolean>(false)
 
   const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({})
@@ -216,9 +216,9 @@ export default function LocalitiesListSection({
       columnVisibility,
     },
     meta: {
-      editData: (values: GetLocalitiesItemResponse) =>
+      editData: (values: LocalityListItemResponse) =>
         router.push(`/reference-data/localities/edit?id=${values.id}`),
-      deleteData: (values: GetLocalitiesItemResponse) => {
+      deleteData: (values: LocalityListItemResponse) => {
         setSelected(values)
         setOpenRemove(true)
       },

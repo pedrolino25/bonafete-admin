@@ -40,6 +40,11 @@ const getReservationsList = async (
       },
     }
   )
+
+  if (!response.ok) {
+    const error = await response.json()
+    throw new Error(error.message)
+  }
   return response.json()
 }
 
@@ -86,6 +91,11 @@ const getAvailabilityVerificationsList = async (): Promise<
       Autorization: getCookie(Cookies.SESSION_COOKIE) as string,
     },
   })
+
+  if (!response.ok) {
+    const error = await response.json()
+    throw new Error(error.message)
+  }
   return response.json()
 }
 

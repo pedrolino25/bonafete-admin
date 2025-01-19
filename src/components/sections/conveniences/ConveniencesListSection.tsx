@@ -14,7 +14,7 @@ import {
 import { useToast } from '@/lib/hooks/use-toast'
 import {
   deleteSpaceConvenience,
-  SpaceConveniencesItemResponse,
+  SpaceConvenienceListItemResponse,
 } from '@/services/api/reference-data'
 import { useMutation } from '@tanstack/react-query'
 import {
@@ -32,7 +32,7 @@ import { useRouter } from 'next/navigation'
 import { useState } from 'react'
 
 interface ConveniencesListSectionProps {
-  data: SpaceConveniencesItemResponse[] | undefined
+  data: SpaceConvenienceListItemResponse[] | undefined
   isPending: boolean
   refresh: () => void
 }
@@ -46,7 +46,7 @@ export default function ConveniencesListSection({
   const router = useRouter()
   const { toast } = useToast()
 
-  const columns: ColumnDef<SpaceConveniencesItemResponse>[] = [
+  const columns: ColumnDef<SpaceConvenienceListItemResponse>[] = [
     {
       accessorKey: 'id',
       id: 'id',
@@ -150,7 +150,7 @@ export default function ConveniencesListSection({
     },
   ]
 
-  const [selected, setSelected] = useState<SpaceConveniencesItemResponse>()
+  const [selected, setSelected] = useState<SpaceConvenienceListItemResponse>()
   const [openRemove, setOpenRemove] = useState<boolean>(false)
 
   const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({})
@@ -174,9 +174,9 @@ export default function ConveniencesListSection({
       columnVisibility,
     },
     meta: {
-      editData: (values: SpaceConveniencesItemResponse) =>
+      editData: (values: SpaceConvenienceListItemResponse) =>
         router.push(`/reference-data/conveniences/edit?id=${values.id}`),
-      deleteData: (values: SpaceConveniencesItemResponse) => {
+      deleteData: (values: SpaceConvenienceListItemResponse) => {
         setSelected(values)
         setOpenRemove(true)
       },

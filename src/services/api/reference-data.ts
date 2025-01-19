@@ -3,7 +3,7 @@ import { Cookies } from '../auth'
 
 const ROOT = process.env.NEXT_PUBLIC_API_URL
 
-export interface GetCountriesItemResponse {
+export interface CountriesItemResponse {
   id: string
   title: string
   latitude: number
@@ -12,7 +12,7 @@ export interface GetCountriesItemResponse {
   url: string
 }
 
-const getCountriesList = async (): Promise<GetCountriesItemResponse[]> => {
+const getCountriesList = async (): Promise<CountriesItemResponse[]> => {
   const response = await fetch(`${ROOT}/api/reference-data/countries`, {
     method: 'GET',
     headers: {
@@ -20,10 +20,15 @@ const getCountriesList = async (): Promise<GetCountriesItemResponse[]> => {
       Autorization: getCookie(Cookies.SESSION_COOKIE) as string,
     },
   })
+
+  if (!response.ok) {
+    const error = await response.json()
+    throw new Error(error.message)
+  }
   return response.json()
 }
 
-const getCountry = async (id: string): Promise<GetCountriesItemResponse> => {
+const getCountry = async (id: string): Promise<CountriesItemResponse> => {
   const response = await fetch(`${ROOT}/api/reference-data/country?id=${id}`, {
     method: 'GET',
     headers: {
@@ -31,6 +36,11 @@ const getCountry = async (id: string): Promise<GetCountriesItemResponse> => {
       Autorization: getCookie(Cookies.SESSION_COOKIE) as string,
     },
   })
+
+  if (!response.ok) {
+    const error = await response.json()
+    throw new Error(error.message)
+  }
   return response.json()
 }
 
@@ -49,6 +59,11 @@ const deleteCountry = async (
     },
     body: JSON.stringify(data),
   })
+
+  if (!response.ok) {
+    const error = await response.json()
+    throw new Error(error.message)
+  }
   return response.json()
 }
 
@@ -72,10 +87,15 @@ const createUpdateCountry = async (
     },
     body: JSON.stringify(data),
   })
+
+  if (!response.ok) {
+    const error = await response.json()
+    throw new Error(error.message)
+  }
   return response.json()
 }
 
-export interface GetLocalitiesItemResponse {
+export interface LocalityListItemResponse {
   id: string
   title: string
   latitude: number
@@ -84,7 +104,7 @@ export interface GetLocalitiesItemResponse {
   url: string
 }
 
-const getLocalitiesList = async (): Promise<GetLocalitiesItemResponse[]> => {
+const getLocalitiesList = async (): Promise<LocalityListItemResponse[]> => {
   const response = await fetch(`${ROOT}/api/reference-data/localities`, {
     method: 'GET',
     headers: {
@@ -92,10 +112,15 @@ const getLocalitiesList = async (): Promise<GetLocalitiesItemResponse[]> => {
       Autorization: getCookie(Cookies.SESSION_COOKIE) as string,
     },
   })
+
+  if (!response.ok) {
+    const error = await response.json()
+    throw new Error(error.message)
+  }
   return response.json()
 }
 
-const getLocality = async (id: string): Promise<GetLocalitiesItemResponse> => {
+const getLocality = async (id: string): Promise<LocalityListItemResponse> => {
   const response = await fetch(`${ROOT}/api/reference-data/locality?id=${id}`, {
     method: 'GET',
     headers: {
@@ -103,6 +128,11 @@ const getLocality = async (id: string): Promise<GetLocalitiesItemResponse> => {
       Autorization: getCookie(Cookies.SESSION_COOKIE) as string,
     },
   })
+
+  if (!response.ok) {
+    const error = await response.json()
+    throw new Error(error.message)
+  }
   return response.json()
 }
 
@@ -121,6 +151,11 @@ const deleteLocality = async (
     },
     body: JSON.stringify(data),
   })
+
+  if (!response.ok) {
+    const error = await response.json()
+    throw new Error(error.message)
+  }
   return response.json()
 }
 
@@ -144,10 +179,15 @@ const createUpdateLocality = async (
     },
     body: JSON.stringify(data),
   })
+
+  if (!response.ok) {
+    const error = await response.json()
+    throw new Error(error.message)
+  }
   return response.json()
 }
 
-export interface SpaceConveniencesItemResponse {
+export interface SpaceConvenienceListItemResponse {
   id: string
   label: string
   type: string
@@ -155,7 +195,7 @@ export interface SpaceConveniencesItemResponse {
 }
 
 const getSpaceConveniencesList = async (): Promise<
-  SpaceConveniencesItemResponse[]
+  SpaceConvenienceListItemResponse[]
 > => {
   const response = await fetch(`${ROOT}/api/reference-data/conveniences`, {
     method: 'GET',
@@ -164,12 +204,17 @@ const getSpaceConveniencesList = async (): Promise<
       Autorization: getCookie(Cookies.SESSION_COOKIE) as string,
     },
   })
+
+  if (!response.ok) {
+    const error = await response.json()
+    throw new Error(error.message)
+  }
   return response.json()
 }
 
 const getSpaceConvenience = async (
   id: string
-): Promise<SpaceConveniencesItemResponse> => {
+): Promise<SpaceConvenienceListItemResponse> => {
   const response = await fetch(
     `${ROOT}/api/reference-data/convenience?id=${id}`,
     {
@@ -180,6 +225,11 @@ const getSpaceConvenience = async (
       },
     }
   )
+
+  if (!response.ok) {
+    const error = await response.json()
+    throw new Error(error.message)
+  }
   return response.json()
 }
 
@@ -198,6 +248,11 @@ const deleteSpaceConvenience = async (
     },
     body: JSON.stringify(data),
   })
+
+  if (!response.ok) {
+    const error = await response.json()
+    throw new Error(error.message)
+  }
   return response.json()
 }
 
@@ -219,6 +274,11 @@ const createUpdateSpaceConvenience = async (
     },
     body: JSON.stringify(data),
   })
+
+  if (!response.ok) {
+    const error = await response.json()
+    throw new Error(error.message)
+  }
   return response.json()
 }
 
@@ -236,6 +296,11 @@ const getSpaceTypesList = async (): Promise<SpaceTypeListItemResponse[]> => {
       Autorization: getCookie(Cookies.SESSION_COOKIE) as string,
     },
   })
+
+  if (!response.ok) {
+    const error = await response.json()
+    throw new Error(error.message)
+  }
   return response.json()
 }
 
@@ -250,6 +315,11 @@ const getSpaceType = async (id: string): Promise<SpaceTypeListItemResponse> => {
       },
     }
   )
+
+  if (!response.ok) {
+    const error = await response.json()
+    throw new Error(error.message)
+  }
   return response.json()
 }
 
@@ -268,6 +338,11 @@ const deleteSpaceType = async (
     },
     body: JSON.stringify(data),
   })
+
+  if (!response.ok) {
+    const error = await response.json()
+    throw new Error(error.message)
+  }
   return response.json()
 }
 
@@ -288,6 +363,11 @@ const createUpdateSpaceType = async (
     },
     body: JSON.stringify(data),
   })
+
+  if (!response.ok) {
+    const error = await response.json()
+    throw new Error(error.message)
+  }
   return response.json()
 }
 
@@ -308,6 +388,11 @@ const getSpaceTargetsList = async (): Promise<
       Autorization: getCookie(Cookies.SESSION_COOKIE) as string,
     },
   })
+
+  if (!response.ok) {
+    const error = await response.json()
+    throw new Error(error.message)
+  }
   return response.json()
 }
 
@@ -324,6 +409,11 @@ const getSpaceTarget = async (
       },
     }
   )
+
+  if (!response.ok) {
+    const error = await response.json()
+    throw new Error(error.message)
+  }
   return response.json()
 }
 
@@ -342,6 +432,11 @@ const deleteSpaceTarget = async (
     },
     body: JSON.stringify(data),
   })
+
+  if (!response.ok) {
+    const error = await response.json()
+    throw new Error(error.message)
+  }
   return response.json()
 }
 
@@ -363,6 +458,11 @@ const createUpdateSpaceTarget = async (
     },
     body: JSON.stringify(data),
   })
+
+  if (!response.ok) {
+    const error = await response.json()
+    throw new Error(error.message)
+  }
   return response.json()
 }
 
@@ -383,6 +483,11 @@ const getPostalCodesList = async (): Promise<PostalCodesListItemResponse[]> => {
       Autorization: getCookie(Cookies.SESSION_COOKIE) as string,
     },
   })
+
+  if (!response.ok) {
+    const error = await response.json()
+    throw new Error(error.message)
+  }
   return response.json()
 }
 
@@ -399,6 +504,11 @@ const getPostalCode = async (
       },
     }
   )
+
+  if (!response.ok) {
+    const error = await response.json()
+    throw new Error(error.message)
+  }
   return response.json()
 }
 
@@ -417,6 +527,11 @@ const deletePostalCode = async (
     },
     body: JSON.stringify(data),
   })
+
+  if (!response.ok) {
+    const error = await response.json()
+    throw new Error(error.message)
+  }
   return response.json()
 }
 
@@ -440,6 +555,11 @@ const createUpdatePostalCode = async (
     },
     body: JSON.stringify(data),
   })
+
+  if (!response.ok) {
+    const error = await response.json()
+    throw new Error(error.message)
+  }
   return response.json()
 }
 
@@ -462,6 +582,11 @@ const getServicesCategoriesList = async (): Promise<
       },
     }
   )
+
+  if (!response.ok) {
+    const error = await response.json()
+    throw new Error(error.message)
+  }
   return response.json()
 }
 
@@ -478,6 +603,11 @@ const getServicesCategory = async (
       },
     }
   )
+
+  if (!response.ok) {
+    const error = await response.json()
+    throw new Error(error.message)
+  }
   return response.json()
 }
 
@@ -496,6 +626,11 @@ const deleteServicesCategory = async (
     },
     body: JSON.stringify(data),
   })
+
+  if (!response.ok) {
+    const error = await response.json()
+    throw new Error(error.message)
+  }
   return response.json()
 }
 
@@ -519,6 +654,11 @@ const createUpdateServicesCategory = async (
       body: JSON.stringify(data),
     }
   )
+
+  if (!response.ok) {
+    const error = await response.json()
+    throw new Error(error.message)
+  }
   return response.json()
 }
 
@@ -541,6 +681,11 @@ const getServicesList = async (): Promise<ServicesListItemResponse[]> => {
       Autorization: getCookie(Cookies.SESSION_COOKIE) as string,
     },
   })
+
+  if (!response.ok) {
+    const error = await response.json()
+    throw new Error(error.message)
+  }
   return response.json()
 }
 
@@ -552,6 +697,11 @@ const getService = async (id: string): Promise<ServicesListItemResponse> => {
       Autorization: getCookie(Cookies.SESSION_COOKIE) as string,
     },
   })
+
+  if (!response.ok) {
+    const error = await response.json()
+    throw new Error(error.message)
+  }
   return response.json()
 }
 
@@ -570,6 +720,11 @@ const deleteService = async (
     },
     body: JSON.stringify(data),
   })
+
+  if (!response.ok) {
+    const error = await response.json()
+    throw new Error(error.message)
+  }
   return response.json()
 }
 
@@ -591,6 +746,11 @@ const createUpdateService = async (
     },
     body: JSON.stringify(data),
   })
+
+  if (!response.ok) {
+    const error = await response.json()
+    throw new Error(error.message)
+  }
   return response.json()
 }
 
