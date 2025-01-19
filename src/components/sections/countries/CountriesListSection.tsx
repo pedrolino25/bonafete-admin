@@ -13,8 +13,8 @@ import {
 } from '@/components/ui/dialog'
 import { useToast } from '@/lib/hooks/use-toast'
 import {
+  CountriesItemResponse,
   deleteCountry,
-  GetCountriesItemResponse,
 } from '@/services/api/reference-data'
 import { useMutation } from '@tanstack/react-query'
 import {
@@ -32,7 +32,7 @@ import { useRouter } from 'next/navigation'
 import { useState } from 'react'
 
 interface CountriesListSectionProps {
-  data: GetCountriesItemResponse[] | undefined
+  data: CountriesItemResponse[] | undefined
   isPending: boolean
   refresh: () => void
 }
@@ -46,7 +46,7 @@ export default function CountriesListSection({
   const router = useRouter()
   const { toast } = useToast()
 
-  const columns: ColumnDef<GetCountriesItemResponse>[] = [
+  const columns: ColumnDef<CountriesItemResponse>[] = [
     {
       accessorKey: 'id',
       id: 'id',
@@ -192,7 +192,7 @@ export default function CountriesListSection({
     },
   ]
 
-  const [selected, setSelected] = useState<GetCountriesItemResponse>()
+  const [selected, setSelected] = useState<CountriesItemResponse>()
   const [openRemove, setOpenRemove] = useState<boolean>(false)
 
   const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({})
@@ -216,9 +216,9 @@ export default function CountriesListSection({
       columnVisibility,
     },
     meta: {
-      editData: (values: GetCountriesItemResponse) =>
+      editData: (values: CountriesItemResponse) =>
         router.push(`/reference-data/coutries/edit?id=${values.id}`),
-      deleteData: (values: GetCountriesItemResponse) => {
+      deleteData: (values: CountriesItemResponse) => {
         setSelected(values)
         setOpenRemove(true)
       },
