@@ -12,9 +12,9 @@ const ReservationsListSection = dynamic(
 
 export default function Reservations() {
   const { isPending, data, refetch } = useQuery({
-    queryKey: ['reservations', ReservationStatus.CancelledByClient],
+    queryKey: ['reservations', ReservationStatus.Pending],
     queryFn: async () => {
-      return await getReservationsList(ReservationStatus.CancelledByClient)
+      return await getReservationsList(ReservationStatus.Pending)
     },
   })
 
