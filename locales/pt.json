@@ -515,5 +515,26 @@
     "sharing-contacts": "conter partilha de contactos",
     "ofensive-language": "conter linguagem imprópria ou ofensiva",
     "not-succinct": "ser pouco sucinta"
+  },
+  "charts": {
+    "subtitle": "Em relação ao mês anterior",
+    "users-total": "Utilizadores",
+    "spaces-total": "Espaços",
+    "reservations-total": "Reservas",
+    "revenue-total": "Faturação",
+    "party-types": "Tipos de Festa",
+    "reservations-confirm": "Confirmadas",
+    "reservations-cancel": "Canceladas",
+    "revenue-platform": "Plataforma",
+    "revenue-stripe": "Stripe",
+    "party": {
+      "2": "Adultos",
+      "1": "Crianças",
+      "6": "Empresas",
+      "5": "Casamentos",
+      "3": "Barby Showers",
+      "4": "Batizados"
+    },
+    "quantity": "Eventos"
   }
 }
