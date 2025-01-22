@@ -32,15 +32,17 @@ export default function Home() {
           </div>
           <div className="grid grid-cols-5 max-sm:grid-cols-1 w-full gap-6 pt-6">
             <div className="col-span-5 max-sm:col-span-1">
-              <RevenueChart data={data?.revenue} />
+              {data?.revenue && <RevenueChart data={data?.revenue} />}
             </div>
           </div>
           <div className="grid grid-cols-5 max-sm:grid-cols-1 w-full gap-6 pt-6">
             <div className="col-span-3 max-sm:col-span-1">
-              <ReservationsChart data={data?.reservations} />
+              {data?.reservations && (
+                <ReservationsChart data={data?.reservations} />
+              )}
             </div>
             <div className="col-span-2 max-sm:col-span-1">
-              <PartyTypesChart data={data?.targets} />
+              {data?.targets && <PartyTypesChart data={data?.targets} />}
             </div>
           </div>
         </div>
