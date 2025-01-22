@@ -30,7 +30,7 @@ export default function ReservationsChart({ data }: ReservationsChartProps) {
   } satisfies ChartConfig
 
   return (
-    <Card className="w-full !border-utility-gray-200">
+    <Card className="w-full h-full !border-utility-gray-200">
       <CardHeader className="items-start pb-0 px-4 py-4">
         <CardTitle className="text-base font-medium text-utility-gray-600">
           {t('charts.reservations-total')}
