@@ -52,8 +52,101 @@ export const calculatePercentageDifference = (
   newValue: number
 ): number => {
   if (oldValue === 0) {
-    throw new Error('Old value cannot be zero.')
+    return 0
   }
   const percentageDifference = ((newValue - oldValue) / oldValue) * 100
   return percentageDifference
+}
+
+export function fillMissingMonthsInSpacesStatistics(
+  data: { month: string; spaces: string }[]
+) {
+  const monthsInRange = []
+  const startMonth = new Date(data[0].month)
+  const endMonth = new Date()
+
+  // Generate all months between startMonth and endMonth
+  let current = new Date(startMonth)
+  while (current <= endMonth) {
+    const formattedMonth = current.toISOString().slice(0, 7)
+    monthsInRange.push(formattedMonth)
+    current.setMonth(current.getMonth() + 1)
+  }
+
+  // Map through the generated months and merge with existing data
+  return monthsInRange.map((month) => {
+    const existing = data.find((item) => item.month === month)
+    return existing ? existing : { month, spaces: '0' }
+  })
+}
+
+export function fillMissingMonthsInUsersStatistics(
+  data: { month: string; users: string }[]
+) {
+  const monthsInRange = []
+  const startMonth = new Date(data[0].month)
+  const endMonth = new Date()
+
+  // Generate all months between startMonth and endMonth
+  let current = new Date(startMonth)
+  while (current <= endMonth) {
+    const formattedMonth = current.toISOString().slice(0, 7)
+    monthsInRange.push(formattedMonth)
+    current.setMonth(current.getMonth() + 1)
+  }
+
+  // Map through the generated months and merge with existing data
+  return monthsInRange.map((month) => {
+    const existing = data.find((item) => item.month === month)
+    return existing ? existing : { month, users: '0' }
+  })
+}
+
+export function fillMissingMonthsInReservationsStatistics(
+  data: { month: string; reservations: string }[]
+) {
+  const monthsInRange = []
+  const startMonth = new Date(data[0].month)
+  const endMonth = new Date()
+
+  // Generate all months between startMonth and endMonth
+  let current = new Date(startMonth)
+  while (current <= endMonth) {
+    const formattedMonth = current.toISOString().slice(0, 7)
+    monthsInRange.push(formattedMonth)
+    current.setMonth(current.getMonth() + 1)
+  }
+
+  // Map through the generated months and merge with existing data
+  return monthsInRange.map((month) => {
+    const existing = data.find((item) => item.month === month)
+    return existing ? existing : { month, reservations: '0' }
+  })
+}
+
+export function fillMissingMonthsInRevenueStatistics(
+  data: {
+    month: string
+    revenue: string
+    platformFee: string
+    stripeFee: string
+  }[]
+) {
+  const monthsInRange = []
+  const startMonth = new Date(data[0].month)
+  const endMonth = new Date()
+
+  let current = new Date(startMonth)
+  while (current <= endMonth) {
+    const formattedMonth = current.toISOString().slice(0, 7)
+    monthsInRange.push(formattedMonth)
+    current.setMonth(current.getMonth() + 1)
+  }
+
+  return monthsInRange.map((month) => {
+    const existing = data.find((item) => item.month === month)
+    return existing
+      ? existing
+      : { month, revenue: '0', platformFee: '0', stripeFee: '0' }
+  })
 }
