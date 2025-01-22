@@ -64,7 +64,6 @@ export default function CreateEditServiceSection({
   })
 
   const onSubmit = (values: ServiceFormType) => {
-    console.log(values.category[0]?.value)
     createUpdateServiceMutation.mutate({
       id: values?.id,
       key: values.key,

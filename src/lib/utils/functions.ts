@@ -61,7 +61,7 @@ export const calculatePercentageDifference = (
 export function fillMissingMonthsInSpacesStatistics(
   data: { month: string; spaces: string }[]
 ) {
-  const monthsInRange = []
+  const monthsInRange: string[] = []
   const startMonth = new Date(data[0].month)
   const endMonth = new Date()
 
@@ -73,17 +73,31 @@ export function fillMissingMonthsInSpacesStatistics(
     current.setMonth(current.getMonth() + 1)
   }
 
-  // Map through the generated months and merge with existing data
-  return monthsInRange.map((month) => {
-    const existing = data.find((item) => item.month === month)
-    return existing ? existing : { month, spaces: '0' }
+  // Use a map to ensure unique months
+  const monthMap = new Map<string, { month: string; spaces: string }>()
+
+  // Add existing data to the map
+  data.forEach((item) => {
+    monthMap.set(item.month, item)
   })
+
+  // Add missing months with default users = '0'
+  monthsInRange.forEach((month) => {
+    if (!monthMap.has(month)) {
+      monthMap.set(month, { month, spaces: '0' })
+    }
+  })
+
+  // Convert the map back to an array
+  return Array.from(monthMap.values()).sort((a, b) =>
+    a.month.localeCompare(b.month)
+  )
 }
 
 export function fillMissingMonthsInUsersStatistics(
   data: { month: string; users: string }[]
 ) {
-  const monthsInRange = []
+  const monthsInRange: string[] = []
   const startMonth = new Date(data[0].month)
   const endMonth = new Date()
 
@@ -95,17 +109,31 @@ export function fillMissingMonthsInUsersStatistics(
     current.setMonth(current.getMonth() + 1)
   }
 
-  // Map through the generated months and merge with existing data
-  return monthsInRange.map((month) => {
-    const existing = data.find((item) => item.month === month)
-    return existing ? existing : { month, users: '0' }
+  // Use a map to ensure unique months
+  const monthMap = new Map<string, { month: string; users: string }>()
+
+  // Add existing data to the map
+  data.forEach((item) => {
+    monthMap.set(item.month, item)
   })
+
+  // Add missing months with default users = '0'
+  monthsInRange.forEach((month) => {
+    if (!monthMap.has(month)) {
+      monthMap.set(month, { month, users: '0' })
+    }
+  })
+
+  // Convert the map back to an array
+  return Array.from(monthMap.values()).sort((a, b) =>
+    a.month.localeCompare(b.month)
+  )
 }
 
 export function fillMissingMonthsInReservationsStatistics(
   data: { month: string; reservations: string }[]
 ) {
-  const monthsInRange = []
+  const monthsInRange: string[] = []
   const startMonth = new Date(data[0].month)
   const endMonth = new Date()
 
@@ -117,11 +145,25 @@ export function fillMissingMonthsInReservationsStatistics(
     current.setMonth(current.getMonth() + 1)
   }
 
-  // Map through the generated months and merge with existing data
-  return monthsInRange.map((month) => {
-    const existing = data.find((item) => item.month === month)
-    return existing ? existing : { month, reservations: '0' }
+  // Use a map to ensure unique months
+  const monthMap = new Map<string, { month: string; reservations: string }>()
+
+  // Add existing data to the map
+  data.forEach((item) => {
+    monthMap.set(item.month, item)
   })
+
+  // Add missing months with default users = '0'
+  monthsInRange.forEach((month) => {
+    if (!monthMap.has(month)) {
+      monthMap.set(month, { month, reservations: '0' })
+    }
+  })
+
+  // Convert the map back to an array
+  return Array.from(monthMap.values()).sort((a, b) =>
+    a.month.localeCompare(b.month)
+  )
 }
 
 export function fillMissingMonthsInRevenueStatistics(
@@ -132,10 +174,11 @@ export function fillMissingMonthsInRevenueStatistics(
     stripeFee: string
   }[]
 ) {
-  const monthsInRange = []
+  const monthsInRange: string[] = []
   const startMonth = new Date(data[0].month)
   const endMonth = new Date()
 
+  // Generate all months between startMonth and endMonth
   let current = new Date(startMonth)
   while (current <= endMonth) {
     const formattedMonth = current.toISOString().slice(0, 7)
@@ -143,10 +186,31 @@ export function fillMissingMonthsInRevenueStatistics(
     current.setMonth(current.getMonth() + 1)
   }
 
-  return monthsInRange.map((month) => {
-    const existing = data.find((item) => item.month === month)
-    return existing
-      ? existing
-      : { month, revenue: '0', platformFee: '0', stripeFee: '0' }
+  // Use a map to ensure unique months
+  const monthMap = new Map<
+    string,
+    { month: string; revenue: string; platformFee: string; stripeFee: string }
+  >()
+
+  // Add existing data to the map
+  data.forEach((item) => {
+    monthMap.set(item.month, item)
   })
+
+  // Add missing months with default users = '0'
+  monthsInRange.forEach((month) => {
+    if (!monthMap.has(month)) {
+      monthMap.set(month, {
+        month,
+        revenue: '0',
+        platformFee: '0',
+        stripeFee: '0',
+      })
+    }
+  })
+
+  // Convert the map back to an array
+  return Array.from(monthMap.values()).sort((a, b) =>
+    a.month.localeCompare(b.month)
+  )
 }
