@@ -31,9 +31,9 @@ export default function SpacesTotalCard({ data }: SpacesTotalCardProps) {
     chartData.length >= 2
       ? parseInt(
           (
-            ((chartData[chartData.length - 1].spaces -
-              chartData[chartData.length - 2].spaces) /
-              chartData[chartData.length - 1].spaces) *
+            ((chartData[chartData.length - 2].spaces -
+              chartData[chartData.length - 1].spaces) /
+              chartData[chartData.length - 2].spaces) *
             100
           )?.toString()
         )

@@ -31,9 +31,9 @@ export default function RevenueTotalCard({ data }: RevenueTotalCardProps) {
     chartData.length >= 2
       ? parseInt(
           (
-            ((chartData[chartData.length - 1].revenue -
-              chartData[chartData.length - 2].revenue) /
-              chartData[chartData.length - 1].revenue) *
+            ((chartData[chartData.length - 2].revenue -
+              chartData[chartData.length - 1].revenue) /
+              chartData[chartData.length - 2].revenue) *
             100
           )?.toString()
         )
