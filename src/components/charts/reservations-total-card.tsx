@@ -1,5 +1,6 @@
 'use client'
 import { cn } from '@/lib/utils'
+import { calculatePercentageDifference } from '@/lib/utils/functions'
 import { TrendingDown, TrendingUp } from 'lucide-react'
 import { useTranslations } from 'next-intl'
 import { Area, AreaChart } from 'recharts'
@@ -31,13 +32,9 @@ export default function ReservationsTotalCard({
 
   const percentage =
     chartData.length >= 2
-      ? parseInt(
-          (
-            ((chartData[chartData.length - 2].reservations -
-              chartData[chartData.length - 1].reservations) /
-              chartData[chartData.length - 2].reservations) *
-            100
-          )?.toString()
+      ? calculatePercentageDifference(
+          chartData[chartData.length - 2].reservations,
+          chartData[chartData.length - 1].reservations
         )
       : 0
 
@@ -75,7 +72,7 @@ export default function ReservationsTotalCard({
                     isDown && 'text-utility-error-500'
                   )}
                 >
-                  {percentage}%
+                  {percentage?.toFixed(0)}%
                 </p>
               </div>
             </div>

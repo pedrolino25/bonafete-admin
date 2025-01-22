@@ -46,3 +46,14 @@ export const getAvailableHourOptions = (
     return []
   }
 }
+
+export const calculatePercentageDifference = (
+  oldValue: number,
+  newValue: number
+): number => {
+  if (oldValue === 0) {
+    throw new Error('Old value cannot be zero.')
+  }
+  const percentageDifference = ((newValue - oldValue) / oldValue) * 100
+  return percentageDifference
+}
