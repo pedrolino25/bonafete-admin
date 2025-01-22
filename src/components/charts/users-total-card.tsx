@@ -31,9 +31,9 @@ export default function UsersTotalCard({ data }: UsersTotalCardProps) {
     chartData.length >= 2
       ? parseInt(
           (
-            ((chartData[chartData.length - 1].users -
-              chartData[chartData.length - 2].users) /
-              chartData[chartData.length - 1].users) *
+            ((chartData[chartData.length - 2].users -
+              chartData[chartData.length - 1].users) /
+              chartData[chartData.length - 2].users) *
             100
           )?.toString()
         )

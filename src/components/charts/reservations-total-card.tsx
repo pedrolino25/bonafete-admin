@@ -33,9 +33,9 @@ export default function ReservationsTotalCard({
     chartData.length >= 2
       ? parseInt(
           (
-            ((chartData[chartData.length - 1].reservations -
-              chartData[chartData.length - 2].reservations) /
-              chartData[chartData.length - 1].reservations) *
+            ((chartData[chartData.length - 2].reservations -
+              chartData[chartData.length - 1].reservations) /
+              chartData[chartData.length - 2].reservations) *
             100
           )?.toString()
         )
