@@ -13,7 +13,7 @@ interface SpacesTotalCardProps {
 
 export default function SpacesTotalCard({ data }: SpacesTotalCardProps) {
   const t = useTranslations()
-  console.log(data)
+
   const chartData = data?.map((item) => {
     return {
       month: item.month,
