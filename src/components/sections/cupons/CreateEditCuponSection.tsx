@@ -8,7 +8,7 @@ import { SelectInput } from '@/components/inputs/select-input/select-input'
 import { TextInput } from '@/components/inputs/text-input/text-input'
 import { Option } from '@/components/ui/select'
 import { toast } from '@/lib/hooks/use-toast'
-import { CuponType } from '@/lib/utils/consts'
+import { CUPON_STATUS_OPTIONS, CUPON_TYPES_OPTIONS } from '@/lib/utils/consts'
 import { createUpdateCupon } from '@/services/api/cupons'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useMutation } from '@tanstack/react-query'
@@ -46,39 +46,6 @@ export default function CreateEditCuponSection({
 }: CreateEditCuponSectionProps) {
   const t = useTranslations()
   const router = useRouter()
-
-  const typeOptions = [
-    { value: CuponType.SIGN_UP, label: t('sections.cupons.sign-up') },
-    {
-      value: CuponType.REFERAL_SHARE,
-      label: t('sections.cupons.referal-share'),
-    },
-    {
-      value: CuponType.REFERAL_RESERVATION,
-      label: t('sections.cupons.referal-reservation'),
-    },
-    { value: CuponType.RESERVATION, label: t('sections.cupons.reservation') },
-    { value: CuponType.REVIEW, label: t('sections.cupons.review') },
-    {
-      value: CuponType.FAST_RESERVATION,
-      label: t('sections.cupons.fast-reservation'),
-    },
-    {
-      value: CuponType.FAST_RESERVATION_FW,
-      label: t('sections.cupons.fast-reservation-fw'),
-    },
-    { value: CuponType.ANNIVERSARY, label: t('sections.cupons.aniversary') },
-    { value: CuponType.APPLICATION, label: t('sections.cupons.application') },
-    { value: CuponType.INFLUENCER, label: t('sections.cupons.influencer') },
-  ]
-
-  const statusOptions = [
-    { value: 'active', label: t('sections.cupons.active') },
-    {
-      value: 'inactive',
-      label: t('sections.cupons.inactive'),
-    },
-  ]
 
   const {
     handleSubmit,
@@ -168,9 +135,10 @@ export default function CreateEditCuponSection({
           data-testid="type"
           label={t('columns.type')}
           placeholder={t('columns.type')}
-          options={typeOptions}
+          options={CUPON_TYPES_OPTIONS}
           value={getValues('type')}
           onSelect={handleSelectChange('type')}
+          useTranslation
         />
         <TextInput
           required
@@ -216,9 +184,10 @@ export default function CreateEditCuponSection({
           data-testid="status"
           label={t('columns.status')}
           placeholder={t('columns.status')}
-          options={statusOptions}
+          options={CUPON_STATUS_OPTIONS}
           value={getValues('status')}
           onSelect={handleSelectChange('status')}
+          useTranslation
         />
       </div>
     </form>
