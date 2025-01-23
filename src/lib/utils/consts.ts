@@ -193,3 +193,36 @@ export enum CuponType {
   APPLICATION = 'aplication',
   INFLUENCER = 'influencer',
 }
+
+export const CUPON_TYPES_OPTIONS = [
+  { value: CuponType.SIGN_UP, label: 'sections.cupons.sign-up' },
+  {
+    value: CuponType.REFERAL_SHARE,
+    label: 'sections.cupons.referal-share',
+  },
+  {
+    value: CuponType.REFERAL_RESERVATION,
+    label: 'sections.cupons.referal-reservation',
+  },
+  { value: CuponType.RESERVATION, label: 'sections.cupons.reservation' },
+  { value: CuponType.REVIEW, label: 'sections.cupons.review' },
+  {
+    value: CuponType.FAST_RESERVATION,
+    label: 'sections.cupons.fast-reservation',
+  },
+  {
+    value: CuponType.FAST_RESERVATION_FW,
+    label: 'sections.cupons.fast-reservation-fw',
+  },
+  { value: CuponType.ANNIVERSARY, label: 'sections.cupons.aniversary' },
+  { value: CuponType.APPLICATION, label: 'sections.cupons.application' },
+  { value: CuponType.INFLUENCER, label: 'sections.cupons.influencer' },
+]
+
+export const CUPON_STATUS_OPTIONS = [
+  { value: 'active', label: 'sections.cupons.active' },
+  {
+    value: 'inactive',
+    label: 'sections.cupons.inactive',
+  },
+]

@@ -4,6 +4,7 @@ import { TextInput } from '@/components/inputs/text-input/text-input'
 import { DataTable } from '@/components/table/table'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
+import { CUPON_TYPES_OPTIONS } from '@/lib/utils/consts'
 import { CuponsListItemResponse } from '@/services/api/cupons'
 import {
   ColumnDef,
@@ -63,6 +64,13 @@ export default function CuponsListSection({
               <ChevronDown className="ml-2 h-3 w-3" />
             ) : null}
           </Button>
+        )
+      },
+      cell: ({ row }) => {
+        return t(
+          CUPON_TYPES_OPTIONS?.find(
+            (item) => item.value === (row.getValue('type') as unknown as string)
+          )?.label
         )
       },
     },
