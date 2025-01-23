@@ -13,6 +13,7 @@ import {
   DialogTitle,
 } from '@/components/ui/dialog'
 import { toast } from '@/lib/hooks/use-toast'
+import { cn } from '@/lib/utils'
 import { BlockMessageReason } from '@/lib/utils/consts'
 import { blockMessage } from '@/services/api/messages'
 import { GetAllAvailabiltyVerificationsWithChatItemResponse } from '@/services/api/reservations'
@@ -452,7 +453,13 @@ export default function AvailabilityVerificationsListSection({
                                   </Button>
                                 </div>
                               ) : (
-                                <p className="text-utility-gray-700">
+                                <p
+                                  className={cn(
+                                    'text-utility-gray-700',
+                                    msg.status === 'blocked' &&
+                                      'text-utility-error-700'
+                                  )}
+                                >
                                   {msg.message}
                                 </p>
                               )}
