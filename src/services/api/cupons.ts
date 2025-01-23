@@ -8,6 +8,7 @@ export interface CuponsListItemResponse {
   type: string
   code: string
   value: string
+  is_percentage: boolean
   min_reservation: string
   expire_at: string
   status: string

@@ -101,13 +101,8 @@ export const routes = [
           },
         ],
       },
-    ],
-  },
-  {
-    title: 'navigation.discount-cupons',
-    links: [
       {
-        title: 'navigation.cupons',
+        title: 'navigation.discount-cupons',
         icon: TicketPercent,
         path: '/cupons/management',
         alias: 'cupons',
