@@ -45,7 +45,11 @@
     "users-employes": "Colaboradores",
     "users-clients": "Clientes",
     "user-permissions": "Permissões",
-    "back": "Voltar"
+    "back": "Voltar",
+    "discount-cupons": "Descontos",
+    "cupons": "Cupões de Desconto",
+    "cupons-management": "Gerir Cupões",
+    "cupons-aniversary": "Cupões de Aniversário"
   },
   "actions": {
     "title": "Ações",
@@ -102,7 +106,8 @@
     "results": "Resultados:",
     "loading": "A carregar...",
     "no-results": "Sem resultados.",
-    "create": "Criar"
+    "create": "Criar",
+    "send-cupons": "Enviar cupões"
   },
   "columns": {
     "id": "ID",
@@ -147,7 +152,17 @@
     "street": "Rua",
     "address": "Morada",
     "conveniences": "Comodidades",
-    "rules": "Regras"
+    "rules": "Regras",
+    "code": "Código",
+    "min_reservation": "Min. Reserva",
+    "expire_at": "Expira em",
+    "percentage": "Percentagem",
+    "fixed": "Fixo",
+    "min-reservation-value": "Valor mínimo de reserva",
+    "expiration-hours": "Horas até expirar",
+    "month": "Mês",
+    "number_of_users": "Número de Utilizadores",
+    "used": "Usados"
   },
   "price-model-options": {
     "hourly-fixed": "Preço fixo á hora",
@@ -255,6 +270,24 @@
       "refund_amount": "Reembolso:",
       "payment_date": "Data de Pagamento:",
       "status": "Estado:"
+    },
+    "cupons": {
+      "edit-title": "Editar Cupão",
+      "create-title": "Criar Cupão",
+      "edit-subtitle": "Insira as informações necessárias para editar o cupão",
+      "create-subtitle": "Insira as informações necessárias para criar o cupão",
+      "sign-up": "Registo",
+      "referal-share": "Referal (Atribuído a quem se registou)",
+      "referal-reservation": "Referal (Atribuído a quem partilhou)",
+      "reservation": "Reserva",
+      "review": "Review",
+      "fast-reservation": "Reserva rápida (Sempre)",
+      "fast-reservation-fw": "Reserva rápida (Follow Up)",
+      "aniversary": "Aniversário",
+      "application": "Aplicação (Código de Desconto)",
+      "influencer": "Influencer (Código de Desconto)",
+      "active": "Ativo",
+      "inactive": "Desativado"
     },
     "onboarding": {
       "title": "Onboarding",
@@ -536,5 +569,9 @@
       "4": "Batizados"
     },
     "quantity": "Eventos"
+  },
+  "cupons-status": {
+    "active": "Ativo",
+    "inactive": "Desativado"
   }
 }
