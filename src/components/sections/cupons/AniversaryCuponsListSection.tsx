@@ -181,7 +181,16 @@ export default function AniversaryCuponsListSection({
               disabled={
                 !data ||
                 data?.filter(
-                  (item) => item.month === format(new Date(), 'MMM yyyy')
+                  (item) =>
+                    item.month ===
+                    format(
+                      new Date(
+                        new Date().getFullYear(),
+                        new Date().getMonth() + 1,
+                        new Date().getDate()
+                      ),
+                      'MMM yyyy'
+                    )
                 )?.length > 0 ||
                 sendAniversaryCuponsMutation.isPending
               }
