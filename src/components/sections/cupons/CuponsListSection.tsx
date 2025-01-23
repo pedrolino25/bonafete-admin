@@ -115,6 +115,14 @@ export default function CuponsListSection({
           </Button>
         )
       },
+      cell: ({ row }) => {
+        return row.original.is_percentage
+          ? `${row.getValue('value')}%`
+          : new Intl.NumberFormat('fr-FR', {
+              style: 'currency',
+              currency: 'EUR',
+            }).format(row.getValue('value') ? row.getValue('value') : '0')
+      },
     },
     {
       accessorKey: 'min_reservation',
@@ -134,6 +142,16 @@ export default function CuponsListSection({
               <ChevronDown className="ml-2 h-3 w-3" />
             ) : null}
           </Button>
+        )
+      },
+      cell: ({ row }) => {
+        return new Intl.NumberFormat('fr-FR', {
+          style: 'currency',
+          currency: 'EUR',
+        }).format(
+          row.getValue('min_reservation')
+            ? row.getValue('min_reservation')
+            : '0'
         )
       },
     },
@@ -156,6 +174,9 @@ export default function CuponsListSection({
             ) : null}
           </Button>
         )
+      },
+      cell: ({ row }) => {
+        return `${row.getValue('expire_at')} dias`
       },
     },
     {
