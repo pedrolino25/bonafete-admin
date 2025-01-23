@@ -88,19 +88,7 @@ export default function CreateEditCuponSection({
   } = useForm<CuponFormType>({
     mode: 'onChange',
     resolver: zodResolver(localityFormSchema),
-    defaultValues: {
-      ...defaultValues,
-      type: defaultValues
-        ? typeOptions?.filter(
-            (item) => item.value === (defaultValues.type as unknown as string)
-          )
-        : [],
-      status: defaultValues
-        ? typeOptions?.filter(
-            (item) => item.value === (defaultValues.status as unknown as string)
-          )
-        : [],
-    },
+    defaultValues,
   })
 
   const onSubmit = (values: CuponFormType) => {
