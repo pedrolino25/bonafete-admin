@@ -4,6 +4,7 @@ import {
   LucideIcon,
   ShieldX,
   Tag,
+  TicketPercent,
   User,
   Users,
 } from 'lucide-react'
@@ -103,6 +104,29 @@ export const routes = [
     ],
   },
   {
+    title: 'navigation.discount-cupons',
+    links: [
+      {
+        title: 'navigation.cupons',
+        icon: TicketPercent,
+        path: '/cupons/management',
+        alias: 'cupons',
+        childrens: [
+          {
+            title: 'navigation.cupons-management',
+            path: '/cupons/management',
+            alias: 'cupons',
+          },
+          {
+            title: 'navigation.cupons-aniversary',
+            path: '/cupons/aniversary',
+            alias: 'cupons',
+          },
+        ],
+      },
+    ],
+  },
+  {
     title: 'navigation.database',
     links: [
       {
@@ -155,7 +179,6 @@ export const routes = [
       },
     ],
   },
-
   {
     title: 'navigation.user-management',
     links: [

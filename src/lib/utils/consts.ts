@@ -180,3 +180,16 @@ export const PACKAGES_ONLY_OPTIONS: Option[] = [
     label: 'packages-only-options.false',
   },
 ]
+
+export enum CuponType {
+  SIGN_UP = 'SIGN_UP',
+  REFERAL_SHARE = 'REFERAL_SHARE',
+  REFERAL_RESERVATION = 'REFERAL_RESERVATION',
+  RESERVATION = 'RESERVATION',
+  REVIEW = 'REVIEW',
+  FAST_RESERVATION = 'FAST_RESERVATION',
+  FAST_RESERVATION_FW = 'FAST_RESERVATION_FW',
+  ANNIVERSARY = 'ANNIVERSARY',
+  APPLICATION = 'aplication',
+  INFLUENCER = 'influencer',
+}
