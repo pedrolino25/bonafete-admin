@@ -26,4 +26,25 @@ const blockMessage = async (data: BlockMessageParams): Promise<void> => {
   return response.json()
 }
 
-export { blockMessage }
+export interface ApproveMessageParams {
+  id: string
+}
+
+const approveMessage = async (data: ApproveMessageParams): Promise<void> => {
+  const response = await fetch(`${ROOT}/api/admin/message/approve`, {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json',
+      Autorization: getCookie(Cookies.SESSION_COOKIE) as string,
+    },
+    body: JSON.stringify(data),
+  })
+
+  if (!response.ok) {
+    const error = await response.json()
+    throw new Error(error.message)
+  }
+  return response.json()
+}
+
+export { approveMessage, blockMessage }
