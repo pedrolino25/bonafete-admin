@@ -15,7 +15,7 @@ import {
 import { toast } from '@/lib/hooks/use-toast'
 import { cn } from '@/lib/utils'
 import { BlockMessageReason } from '@/lib/utils/consts'
-import { blockMessage } from '@/services/api/messages'
+import { approveMessage, blockMessage } from '@/services/api/messages'
 import { GetAllAvailabiltyVerificationsWithChatItemResponse } from '@/services/api/reservations'
 import { useMutation } from '@tanstack/react-query'
 import {
@@ -370,6 +370,26 @@ export default function AvailabilityVerificationsListSection({
     },
   })
 
+  const approveMessageMutation = useMutation({
+    mutationFn: approveMessage,
+    onSuccess: () => {
+      toast({
+        variant: 'success',
+        title: t('success'),
+        description: t('success-messages.submit'),
+      })
+      setOpenView(false)
+      refresh()
+    },
+    onError: () => {
+      toast({
+        variant: 'destructive',
+        title: t('error'),
+        description: t('error-messages.submit'),
+      })
+    },
+  })
+
   return (
     <main>
       <DataTable.HeaderContainer>
@@ -434,9 +454,12 @@ export default function AvailabilityVerificationsListSection({
                               </p>
                               {msg.status === 'pending' ? (
                                 <div className="flex gap-4 items-center max-sm:flex-col">
-                                  <p className="text-utility-error-700 text-wraps">
-                                    {msg.message}
-                                  </p>
+                                  <div
+                                    dangerouslySetInnerHTML={{
+                                      __html: msg.message,
+                                    }}
+                                    className="text-utility-error-700 text-wraps"
+                                  ></div>
                                   <Button
                                     variant="link"
                                     color="destructive"
@@ -451,17 +474,29 @@ export default function AvailabilityVerificationsListSection({
                                   >
                                     {t('button-actions.block')}
                                   </Button>
+                                  <Button
+                                    variant="link"
+                                    size="xs"
+                                    onClick={() => {
+                                      approveMessageMutation.mutate({
+                                        id: msg.id,
+                                      })
+                                    }}
+                                  >
+                                    {t('button-actions.approve')}
+                                  </Button>
                                 </div>
                               ) : (
-                                <p
+                                <div
+                                  dangerouslySetInnerHTML={{
+                                    __html: msg.message,
+                                  }}
                                   className={cn(
                                     'text-utility-gray-700',
                                     msg.status === 'blocked' &&
                                       'text-utility-error-700'
                                   )}
-                                >
-                                  {msg.message}
-                                </p>
+                                ></div>
                               )}
 
                               <p className="text-xs mt-1">{msg.created_at}</p>
