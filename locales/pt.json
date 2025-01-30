@@ -94,7 +94,8 @@
     "complete": "Finalizar",
     "create": "Criar",
     "next": "Seguinte",
-    "send": "Enviar"
+    "send": "Enviar",
+    "approve": "Permitir"
   },
   "table": {
     "search": "Pesquisar",
