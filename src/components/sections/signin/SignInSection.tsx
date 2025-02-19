@@ -17,6 +17,7 @@ export default function SignInSection() {
           objectFit="cover"
           priority
           quality={70}
+          className="rounded-lg"
         />
         <div className="hidden sm:block h-svh w-0 sm:w-full absolute top-0 bg-black opacity-40"></div>
         <div className="hidden sm:block h-svh w-0 sm:w-full absolute top-0">
@@ -34,7 +35,7 @@ export default function SignInSection() {
             alt={'logo-image'}
             height={70}
             width={70}
-            className="m-auto pb-4"
+            className="m-auto mb-4 rounded-lg"
           />
           <p className="text-utility-gray-500 font-light text-sm text-center pb-4">
             {t('signin.subtitle')}
