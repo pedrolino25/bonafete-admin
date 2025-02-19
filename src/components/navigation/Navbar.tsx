@@ -96,6 +96,7 @@ export function Navbar({ children, topbarActions }: NavbarProps) {
             >
               <div className="flex aspect-square size-8 items-center justify-center rounded-lg text-sidebar-primary-foreground">
                 <Image
+                  className="rounded-lg"
                   src={logo}
                   alt={'logo-image'}
                   priority
@@ -200,6 +201,7 @@ export function Navbar({ children, topbarActions }: NavbarProps) {
                     <DropdownMenuItem>
                       <div className="flex aspect-square size-8 items-center justify-center rounded-lg text-sidebar-primary-foreground">
                         <Image
+                          className="rounded-sm"
                           src={logo}
                           alt={'logo-image'}
                           priority
