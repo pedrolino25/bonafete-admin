@@ -54,7 +54,7 @@ export default function AvailabilityVerificationsListSection({
   const [selected, setSelected] =
     React.useState<GetAllAvailabiltyVerificationsWithChatItemResponse>()
   const [openView, setOpenView] = React.useState<boolean>(false)
-  const [openFilters, setOpenFilters] = useState<boolean>(false)
+  const [openFilters, setOpenFilters] = React.useState<boolean>(false)
 
   const columns: ColumnDef<GetAllAvailabiltyVerificationsWithChatItemResponse>[] =
     [

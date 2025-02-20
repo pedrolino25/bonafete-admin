@@ -49,7 +49,12 @@
     "discount-cupons": "Descontos",
     "cupons": "Cupões de Desconto",
     "cupons-management": "Gerir Cupões",
-    "cupons-aniversary": "Cupões de Aniversário"
+    "cupons-aniversary": "Cupões de Aniversário",
+    "order-requests": "Orçamentos",
+    "order-requests-new": "Novos",
+    "order-requests-progress": "Em curso",
+    "order-requests-completed": "Concluídos",
+    "order-requests-archived": "Arquivados"
   },
   "actions": {
     "title": "Ações",
@@ -66,7 +71,8 @@
     "spaces": "Espaços",
     "reservations": "Reservas",
     "view-reservation": "Dados de Pagamento",
-    "view-conversation": "Conversa"
+    "view-conversation": "Conversa",
+    "available-offers-list": "Ofertas disponíveis"
   },
   "subtitles": {
     "remove": "Tem a certeza que deseja eliminar o registo?",
@@ -130,9 +136,12 @@
     "category": "Categoria",
     "reservation_id": "Reserva",
     "date": "Data",
+    "date-time": "Data e hora",
     "attendance": "Número de Pessoas",
+    "number_of_persons": "Número de Pessoas",
     "status": "Estado",
     "client_name": "Cliente",
+    "user_name": "Cliente",
     "host_name": "Anfitrião",
     "space_name": "Espaço",
     "amount": "Valor",
@@ -163,7 +172,12 @@
     "expiration-hours": "Horas até expirar",
     "month": "Mês",
     "number_of_users": "Número de Utilizadores",
-    "used": "Usados"
+    "used": "Usados",
+    "party_type": "Evento",
+    "services": "Serviços",
+    "space_type": "Tipo de Espaço",
+    "time_init": "Hora de inicio",
+    "time_end": "Hora de fim"
   },
   "price-model-options": {
     "hourly-fixed": "Preço fixo á hora",
@@ -200,6 +214,10 @@
     "only-space": "Aluguer",
     "space-and-packages": "Aluguer + Pacotes",
     "packages": "Pacotes"
+  },
+  "order-type": {
+    "rental": "Aluguer",
+    "services": "Serviços"
   },
   "business_type": {
     "individual": "Indivíduo",
@@ -493,6 +511,10 @@
       "package": "Pacote de serviços ($1)",
       "package-title": "Pacote $1",
       "service": "Serviço ($1)"
+    },
+    "order-request": {
+      "title": "Pedido de Orçamento",
+      "subtitle": "Informações de pedido de orçamento"
     }
   },
   "error": "Erro",

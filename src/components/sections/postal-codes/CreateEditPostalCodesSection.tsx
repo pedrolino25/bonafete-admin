@@ -117,6 +117,7 @@ export default function CreateEditPostalCodeSection({
           placeholder={t('columns.id')}
           value={getValues().id}
           onChange={handleChange('id')}
+          disabled={!!defaultValues?.id}
         />
         <TextInput
           required

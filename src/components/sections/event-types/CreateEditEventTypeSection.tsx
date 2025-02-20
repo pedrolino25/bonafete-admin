@@ -113,6 +113,7 @@ export default function CreateEditEventTypeSection({
           placeholder={t('columns.id')}
           value={getValues().id}
           onChange={handleChange('id')}
+          disabled={!!defaultValues?.id}
         />
         <TextInput
           required

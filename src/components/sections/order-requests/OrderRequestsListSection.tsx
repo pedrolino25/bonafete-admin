@@ -4,7 +4,8 @@ import { TextInput } from '@/components/inputs/text-input/text-input'
 import { DataTable } from '@/components/table/table'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
-import { SpaceListItemResponse } from '@/services/api/spaces'
+import { splitCommaGetFirst } from '@/lib/utils'
+import { GetOrderRequestsItemResponse } from '@/services/api/order-requests'
 import {
   ColumnDef,
   ColumnFiltersState,
@@ -14,24 +15,25 @@ import {
   useReactTable,
   VisibilityState,
 } from '@tanstack/react-table'
-import { format } from 'date-fns'
-import { ChevronDown, ChevronUp, Search } from 'lucide-react'
+import { ChevronDown, ChevronUp, Eye, Search } from 'lucide-react'
 import { useTranslations } from 'next-intl'
 import Link from 'next/link'
-import { useRouter } from 'next/navigation'
 import { useState } from 'react'
-interface SpacesListSectionProps {
-  data: SpaceListItemResponse[] | undefined
+
+interface OrderRequestsListSectionProps {
+  data: GetOrderRequestsItemResponse[] | undefined
   isPending: boolean
+  refresh: () => void
 }
-export default function SpacesListSection({
+
+export default function OrderRequestsListSection({
   data,
   isPending,
-}: SpacesListSectionProps) {
+  refresh,
+}: OrderRequestsListSectionProps) {
   const t = useTranslations()
-  const router = useRouter()
 
-  const columns: ColumnDef<SpaceListItemResponse>[] = [
+  const columns: ColumnDef<GetOrderRequestsItemResponse>[] = [
     {
       accessorKey: 'id',
       id: 'id',
@@ -44,9 +46,9 @@ export default function SpacesListSection({
       },
     },
     {
-      accessorKey: 'name',
-      id: 'name',
-      header: ({ column }) => {
+      accessorKey: 'user_name',
+      id: 'user_name',
+      header: ({ column }: any) => {
         return (
           <Button
             variant="link"
@@ -54,7 +56,7 @@ export default function SpacesListSection({
             className="text-utility-gray-600"
             onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
           >
-            {t('columns.name')}
+            {t('columns.client_name')}
             {column.getIsSorted() === 'desc' ? (
               <ChevronUp className="ml-2 h-3 w-3" />
             ) : column.getIsSorted() === 'asc' ? (
@@ -65,18 +67,18 @@ export default function SpacesListSection({
       },
       cell: ({ row }) => {
         return (
-          <Link href={`/space?id=${row.getValue('id')}`}>
+          <Link href={`/client?id=${row.original.user_id}`}>
             <span className="text-sm font-medium text-utility-gray-900">
-              {row.getValue('name')}
+              {row.original.user_name}
             </span>
           </Link>
         )
       },
     },
     {
-      accessorKey: 'host_name',
-      id: 'host_name',
-      header: ({ column }) => {
+      accessorKey: 'party_type',
+      id: 'party_type',
+      header: ({ column }: any) => {
         return (
           <Button
             variant="link"
@@ -84,7 +86,28 @@ export default function SpacesListSection({
             className="text-utility-gray-600"
             onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
           >
-            {t('columns.host_name')}
+            {t('columns.party_type')}
+            {column.getIsSorted() === 'desc' ? (
+              <ChevronUp className="ml-2 h-3 w-3" />
+            ) : column.getIsSorted() === 'asc' ? (
+              <ChevronDown className="ml-2 h-3 w-3" />
+            ) : null}
+          </Button>
+        )
+      },
+    },
+    {
+      accessorKey: 'date',
+      id: 'date',
+      header: ({ column }: any) => {
+        return (
+          <Button
+            variant="link"
+            color="secondary"
+            className="text-utility-gray-600"
+            onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
+          >
+            {t('columns.date-time')}
             {column.getIsSorted() === 'desc' ? (
               <ChevronUp className="ml-2 h-3 w-3" />
             ) : column.getIsSorted() === 'asc' ? (
@@ -94,19 +117,34 @@ export default function SpacesListSection({
         )
       },
       cell: ({ row }) => {
+        return `${row.original.date}, ${row.original.time_init} - ${row.original.time_end}`
+      },
+    },
+    {
+      accessorKey: 'number_of_persons',
+      id: 'number_of_persons',
+      header: ({ column }: any) => {
         return (
-          <Link href={`/host?id=${row.original.host_id}`}>
-            <span className="text-sm font-medium text-utility-gray-900">
-              {row.getValue('host_name')}
-            </span>
-          </Link>
+          <Button
+            variant="link"
+            color="secondary"
+            className="text-utility-gray-600"
+            onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
+          >
+            {t('columns.attendance')}
+            {column.getIsSorted() === 'desc' ? (
+              <ChevronUp className="ml-2 h-3 w-3" />
+            ) : column.getIsSorted() === 'asc' ? (
+              <ChevronDown className="ml-2 h-3 w-3" />
+            ) : null}
+          </Button>
         )
       },
     },
     {
       accessorKey: 'locality',
       id: 'locality',
-      header: ({ column }) => {
+      header: ({ column }: any) => {
         return (
           <Button
             variant="link"
@@ -123,11 +161,14 @@ export default function SpacesListSection({
           </Button>
         )
       },
+      cell: ({ row }) => {
+        return splitCommaGetFirst(row.original.locality)
+      },
     },
     {
       accessorKey: 'type',
       id: 'type',
-      header: ({ column }) => {
+      header: ({ column }: any) => {
         return (
           <Button
             variant="link"
@@ -145,71 +186,23 @@ export default function SpacesListSection({
         )
       },
       cell: ({ row }) => {
-        return <Badge shape="square">{row.getValue('type')}</Badge>
-      },
-    },
-    {
-      accessorKey: 'business_model',
-      id: 'business_model',
-      header: ({ column }) => {
         return (
-          <Button
-            variant="link"
-            color="secondary"
-            className="text-utility-gray-600"
-            onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
+          <Badge
+            color={
+              row.original.services?.length > 0 ? 'blue_light' : 'gray_blue'
+            }
           >
-            {t('columns.business_model')}
-            {column.getIsSorted() === 'desc' ? (
-              <ChevronUp className="ml-2 h-3 w-3" />
-            ) : column.getIsSorted() === 'asc' ? (
-              <ChevronDown className="ml-2 h-3 w-3" />
-            ) : null}
-          </Button>
-        )
-      },
-      cell: ({ row }) => {
-        return (
-          <Badge shape="square">
-            {t(`business_model.${row.getValue('business_model')}`)}
+            {row.original.services?.length > 0
+              ? t(`order-type.services`)
+              : t(`order-type.rental`)}
           </Badge>
-        )
-      },
-    },
-    {
-      accessorKey: 'targets',
-      id: 'targets',
-      header: ({ column }) => {
-        return (
-          <Button
-            variant="link"
-            color="secondary"
-            className="text-utility-gray-600"
-            onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
-          >
-            {t('columns.targets')}
-            {column.getIsSorted() === 'desc' ? (
-              <ChevronUp className="ml-2 h-3 w-3" />
-            ) : column.getIsSorted() === 'asc' ? (
-              <ChevronDown className="ml-2 h-3 w-3" />
-            ) : null}
-          </Button>
-        )
-      },
-      cell: ({ row }) => {
-        return (
-          <div className="flex flex-wrap gap-1">
-            {(row.getValue('targets') as string[])?.map((item: string) => {
-              return <Badge shape="square">{item}</Badge>
-            })}
-          </div>
         )
       },
     },
     {
       accessorKey: 'created_at',
       id: 'created_at',
-      header: ({ column }) => {
+      header: ({ column }: any) => {
         return (
           <Button
             variant="link"
@@ -226,18 +219,32 @@ export default function SpacesListSection({
           </Button>
         )
       },
-      cell: ({ row }) => {
-        return format(new Date(row.getValue('created_at')), 'dd/MM/yyyy HH:mm')
+    },
+    {
+      accessorKey: 'actions',
+      header: () => {
+        return <></>
       },
+      cell: ({ row }) => {
+        return (
+          <div className="inline-flex gap-x-[4px] items-center justify-end w-[100%]">
+            <Link href={`/order-request?id=${row.original.id}`}>
+              <Button className="px-3" color="secondary" size="xs">
+                <Eye className="w-4 h-4" />
+              </Button>
+            </Link>
+          </div>
+        )
+      },
+      enableSorting: false,
+      enableHiding: false,
     },
   ]
 
-  const [openFilters, setOpenFilters] = useState<boolean>(false)
   const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({
     id: false,
-    targets: false,
-    business_model: false,
   })
+
   const [search, setSearch] = useState<string>('')
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([])
 
@@ -255,10 +262,6 @@ export default function SpacesListSection({
       columnFilters: columnFilters,
       globalFilter: search,
       columnVisibility,
-    },
-    meta: {
-      viewHost: (id: string) => router.push(`/host?id=${id}`),
-      viewSpace: (id: string) => router.push(`/edit-space?id=${id}`),
     },
   })
 
@@ -286,6 +289,7 @@ export default function SpacesListSection({
                 data-testid="search-input"
               />
             </div>
+
             <DataTable.ColumnVisibilityDropdown table={table} />
           </div>
         </DataTable.HeaderActionsContainer>

@@ -1,6 +1,7 @@
 import {
   Database,
   House,
+  Inbox,
   LucideIcon,
   ShieldX,
   Tag,
@@ -101,6 +102,35 @@ export const routes = [
           },
         ],
       },
+      {
+        title: 'navigation.order-requests',
+        icon: Inbox,
+        path: '/order-requests/new',
+        alias: 'order-requests',
+        childrens: [
+          {
+            title: 'navigation.order-requests-new',
+            path: '/order-requests/new',
+            alias: 'order-requests',
+          },
+          {
+            title: 'navigation.order-requests-progress',
+            path: '/order-requests/progress',
+            alias: 'order-requests',
+          },
+          {
+            title: 'navigation.order-requests-completed',
+            path: '/order-requests/completed',
+            alias: 'order-requests',
+          },
+          {
+            title: 'navigation.order-requests-archived',
+            path: '/order-requests/archived',
+            alias: 'order-requests',
+          },
+        ],
+      },
+
       {
         title: 'navigation.discount-cupons',
         icon: TicketPercent,

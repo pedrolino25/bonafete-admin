@@ -114,6 +114,7 @@ export default function CreateEditConvenienceSection({
           value={getValues().id}
           onChange={handleChange('id')}
           type="number"
+          disabled={!!defaultValues?.id}
         />
         <TextInput
           required

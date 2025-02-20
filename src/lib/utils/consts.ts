@@ -226,3 +226,10 @@ export const CUPON_STATUS_OPTIONS = [
     label: 'sections.cupons.inactive',
   },
 ]
+
+export enum OrderRequestStatus {
+  New = 'new',
+  Archived = 'archived',
+  InProgress = 'progress',
+  Completed = 'completed',
+}

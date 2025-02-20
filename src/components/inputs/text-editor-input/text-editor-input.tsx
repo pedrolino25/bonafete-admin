@@ -15,7 +15,6 @@ export interface TextEditorInputProps {
   placeholder?: string
 }
 
-// Use React.forwardRef to pass the ref down to Input
 export const TextEditorInput = React.forwardRef<
   HTMLInputElement,
   TextEditorInputProps
